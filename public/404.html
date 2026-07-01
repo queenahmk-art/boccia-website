@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <title>Redirecting...</title>
+    <script>
+      (function () {
+        var base = "/boccia-website";
+        var path = location.pathname + location.search + location.hash;
+        sessionStorage.redirect = path;
+        location.replace(base + "/");
+      })();
+    </script>
+  </head>
+  <body></body>
+</html>
