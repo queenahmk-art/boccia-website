@@ -1239,17 +1239,23 @@ p {
 @media (max-width: 760px) {
   .site-header {
     align-items: center;
-    min-height: 74px;
-    padding: 12px 16px;
+    min-height: 68px;
+    padding: 10px 14px;
   }
 
   .brand {
-    max-width: calc(100vw - 92px);
+    max-width: calc(100vw - 76px);
+    gap: 9px;
   }
 
   .brand img {
-    width: 46px;
-    height: 46px;
+    width: 42px;
+    height: 42px;
+  }
+
+  .brand strong {
+    font-size: clamp(0.78rem, 3.2vw, 0.9rem);
+    line-height: 1.15;
   }
 
   .brand small {
@@ -1257,18 +1263,26 @@ p {
   }
 
   .nav-toggle {
+    position: relative;
     display: grid;
     flex: 0 0 auto;
+    width: 42px;
+    height: 42px;
   }
 
   .site-nav {
     position: absolute;
-    top: 74px;
-    right: 16px;
-    left: 16px;
+    top: calc(100% + 8px);
+    right: 12px;
+    left: 12px;
     display: none;
-    padding: 10px;
+    max-height: calc(100vh - 92px);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
+    padding: 8px;
+    overflow-y: auto;
     border: 1px solid var(--line);
+    border-radius: 4px;
     background: var(--paper);
     box-shadow: var(--shadow);
   }
@@ -1279,8 +1293,49 @@ p {
 
   .site-nav a {
     justify-content: center;
-    min-height: 46px;
-    font-size: 0.9rem;
+    min-height: 44px;
+    padding: 8px 6px;
+    font-size: 0.78rem;
+    line-height: 1.2;
+    text-align: center;
+    white-space: normal;
+  }
+
+  .site-nav .contact-link,
+  .site-nav .language-link {
+    grid-column: 1 / -1;
+  }
+
+  .nav-toggle span:not(.sr-only) {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: 0;
+    transition: opacity 0.18s ease, transform 0.18s ease;
+  }
+
+  .nav-toggle span:nth-child(1) {
+    transform: translate(-50%, -8px);
+  }
+
+  .nav-toggle span:nth-child(2) {
+    transform: translate(-50%, -1px);
+  }
+
+  .nav-toggle span:nth-child(3) {
+    transform: translate(-50%, 6px);
+  }
+
+  .nav-toggle.is-open span:nth-child(1) {
+    transform: translate(-50%, -1px) rotate(45deg);
+  }
+
+  .nav-toggle.is-open span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .nav-toggle.is-open span:nth-child(3) {
+    transform: translate(-50%, -1px) rotate(-45deg);
   }
 
   h1 {
@@ -1364,7 +1419,7 @@ p {
 
 @media (max-width: 430px) {
   .brand strong {
-    font-size: 0.88rem;
+    font-size: 0.8rem;
   }
 
   .offer-card,

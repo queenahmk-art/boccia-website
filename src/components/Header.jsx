@@ -21,7 +21,7 @@ export default function Header() {
       </Link>
 
       <button
-        className="nav-toggle"
+        className={`nav-toggle ${isOpen ? "is-open" : ""}`}
         type="button"
         aria-expanded={isOpen}
         aria-controls="site-nav"
