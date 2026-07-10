@@ -5,10 +5,9 @@
     <title>Redirecting...</title>
     <script>
       (function () {
-        var base = "/boccia-website";
         var path = location.pathname + location.search + location.hash;
         sessionStorage.redirect = path;
-        location.replace(base + "/");
+        location.replace("/");
       })();
     </script>
   </head>
