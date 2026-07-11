@@ -602,13 +602,15 @@ p {
 
 .program-media {
   position: relative;
+  aspect-ratio: 16 / 11;
   overflow: hidden;
   background: var(--ink);
 }
 
 .program-media img {
   width: 100%;
-  aspect-ratio: 16 / 11;
+  height: 100%;
+  aspect-ratio: auto;
   object-fit: cover;
   transition: transform 0.3s ease;
 }
@@ -1391,6 +1393,10 @@ p {
   }
 
   .program-media img {
+    height: 100%;
+  }
+
+  .program-media {
     aspect-ratio: 4 / 3;
   }
 
