@@ -41,7 +41,7 @@ export default function Header() {
             .join(" ");
 
           return (
-            <NavLink key={item.path} to={itemPath} className={classes || undefined} onClick={closeNav}>
+            <NavLink key={item.path} to={itemPath} end={item.path === "/"} className={classes || undefined} onClick={closeNav}>
               {item.label}
             </NavLink>
           );
