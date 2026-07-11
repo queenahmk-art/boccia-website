@@ -128,7 +128,7 @@ async function validateRoute(route) {
 async function validateSitemap() {
   const sitemap = await readRequired("sitemap.xml");
   const locations = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
-  const expected = staticRoutes.map((route) => `${SITE_URL}${route}`);
+  const expected = staticRoutes.map((route) => getSeo(route).canonical);
 
   if (locations.length !== staticRoutes.length) fail("sitemap.xml", `expected ${staticRoutes.length} URLs, found ${locations.length}`);
   if (new Set(locations).size !== locations.length) fail("sitemap.xml", "contains duplicate URLs");

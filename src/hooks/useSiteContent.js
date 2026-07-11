@@ -6,20 +6,24 @@ export function getLanguageFromPath(pathname) {
 }
 
 export function getLocalizedPath(path, lang) {
+  const withTrailingSlash = path === "/" ? "/" : `${path.replace(/\/$/, "")}/`;
+
   if (lang === "en") {
-    return path === "/" ? "/en" : `/en${path}`;
+    return path === "/" ? "/en/" : `/en${withTrailingSlash}`;
   }
-  return path;
+  return withTrailingSlash;
 }
 
 export function switchLanguagePath(pathname) {
-  if (pathname === "/en") {
+  const path = pathname.length > 1 ? pathname.replace(/\/$/, "") : pathname;
+
+  if (path === "/en") {
     return "/";
   }
-  if (pathname.startsWith("/en/")) {
-    return pathname.replace(/^\/en/, "") || "/";
+  if (path.startsWith("/en/")) {
+    return `${path.replace(/^\/en/, "")}/`;
   }
-  return pathname === "/" ? "/en" : `/en${pathname}`;
+  return path === "/" ? "/en/" : `/en${path}/`;
 }
 
 export function useSiteContent() {

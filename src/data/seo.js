@@ -91,6 +91,10 @@ export function getAlternatePaths(pathname) {
   return { zhPath, enPath };
 }
 
+function toCanonicalUrl(pathname) {
+  return `${SITE_URL}${pathname === "/" ? "/" : `${pathname}/`}`;
+}
+
 export function getSeo(pathname) {
   const path = normalisePath(pathname);
   const language = isEnglishPath(path) ? "en" : "zh";
@@ -104,9 +108,9 @@ export function getSeo(pathname) {
       language,
       locale: language === "en" ? "en_HK" : "zh_HK",
       lang: language === "en" ? "en-HK" : "zh-Hant-HK",
-      canonical: `${SITE_URL}${path === "/" ? "/" : path}`,
-      zhUrl: `${SITE_URL}${zhPath}`,
-      enUrl: `${SITE_URL}${enPath}`,
+      canonical: toCanonicalUrl(path),
+      zhUrl: toCanonicalUrl(zhPath),
+      enUrl: toCanonicalUrl(enPath),
     };
   }
 
@@ -116,9 +120,9 @@ export function getSeo(pathname) {
     language,
     locale: language === "en" ? "en_HK" : "zh_HK",
     lang: language === "en" ? "en-HK" : "zh-Hant-HK",
-    canonical: `${SITE_URL}${path === "/" ? "/" : path}`,
-    zhUrl: `${SITE_URL}${zhPath}`,
-    enUrl: `${SITE_URL}${enPath}`,
+    canonical: toCanonicalUrl(path),
+    zhUrl: toCanonicalUrl(zhPath),
+    enUrl: toCanonicalUrl(enPath),
     noindex: false,
   };
 }
