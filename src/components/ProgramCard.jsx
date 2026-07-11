@@ -1,10 +1,20 @@
 import { Link } from "react-router-dom";
+import { getImageDimensions } from "../data/siteData.js";
 
 export default function ProgramCard({ item, to = "/contact", compact = false }) {
+  const imageDimensions = getImageDimensions(item.image);
+
   return (
     <article className={`program-card ${compact ? "compact" : ""} ${item.photoFrame ? "photo-frame" : ""}`}>
       <div className="program-media">
-        <img src={item.image} alt={item.title} />
+        <img
+          src={item.image}
+          alt={item.title}
+          width={imageDimensions.width}
+          height={imageDimensions.height}
+          loading="lazy"
+          decoding="async"
+        />
         <span>{item.number}</span>
       </div>
       <div className="program-copy">

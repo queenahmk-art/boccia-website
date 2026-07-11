@@ -1,7 +1,7 @@
 import FeatureStrip from "../components/FeatureStrip.jsx";
 import RuleCard from "../components/RuleCard.jsx";
 import SectionHeading from "../components/SectionHeading.jsx";
-import { assets } from "../data/siteData.js";
+import { assetMeta, assets } from "../data/siteData.js";
 import { useSiteContent } from "../hooks/useSiteContent.js";
 
 export default function Rules() {
@@ -11,10 +11,16 @@ export default function Rules() {
   return (
     <>
       <section className="page-hero image-page-hero">
-        <img src={assets.rulesImage} alt={rules.imageAlt} />
-        <div>
-          <p className="eyebrow light">{rules.kicker}</p>
-          {rules.title ? <h1>{rules.title}</h1> : null}
+          <img
+            src={assets.rulesImage}
+            alt={rules.imageAlt}
+            width={assetMeta.rulesImage.width}
+            height={assetMeta.rulesImage.height}
+            fetchpriority="high"
+          />
+          <div>
+            <p className="eyebrow light">{rules.kicker}</p>
+          {rules.title ? <h1>{rules.title}</h1> : <h1 className="sr-only">{rules.pageH1}</h1>}
           <p>{rules.intro}</p>
         </div>
       </section>

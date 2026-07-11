@@ -8,10 +8,13 @@ import Services from "./pages/Services.jsx";
 import Partnership from "./pages/Partnership.jsx";
 import CoachesReferees from "./pages/CoachesReferees.jsx";
 import Contact from "./pages/Contact.jsx";
+import NotFound from "./pages/NotFound.jsx";
+import SEO from "./components/SEO.jsx";
 
 export default function App() {
   return (
     <div className="app-shell">
+      <SEO />
       <Header />
       <main>
         <Routes>
@@ -29,7 +32,7 @@ export default function App() {
           <Route path="/en/partnership" element={<Partnership />} />
           <Route path="/en/coaches-referees" element={<CoachesReferees />} />
           <Route path="/en/contact" element={<Contact />} />
-          <Route path="*" element={<Home />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
       <Footer />

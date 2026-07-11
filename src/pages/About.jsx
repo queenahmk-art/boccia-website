@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import FeatureStrip from "../components/FeatureStrip.jsx";
 import SectionHeading from "../components/SectionHeading.jsx";
-import { assets } from "../data/siteData.js";
+import { assetMeta, assets } from "../data/siteData.js";
 import { useSiteContent } from "../hooks/useSiteContent.js";
 
 export default function About() {
@@ -11,7 +11,13 @@ export default function About() {
   return (
     <>
       <section className="page-hero image-page-hero">
-        <img src={assets.eventImage} alt={about.imageAlt} />
+        <img
+          src={assets.eventImage}
+          alt={about.imageAlt}
+          width={assetMeta.eventImage.width}
+          height={assetMeta.eventImage.height}
+          fetchpriority="high"
+        />
         <div>
           <p className="eyebrow light">{about.kicker}</p>
           <h1>{about.title}</h1>
@@ -45,7 +51,14 @@ export default function About() {
           </Link>
         </div>
         <div className="split-media">
-          <img src={assets.promoActivity} alt={about.imageAlt} />
+          <img
+            src={assets.promoActivity}
+            alt={about.platformImageAlt}
+            width={assetMeta.promoActivity.width}
+            height={assetMeta.promoActivity.height}
+            loading="lazy"
+            decoding="async"
+          />
         </div>
       </section>
     </>

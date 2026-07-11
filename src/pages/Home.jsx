@@ -3,7 +3,7 @@ import FeatureStrip from "../components/FeatureStrip.jsx";
 import Hero from "../components/Hero.jsx";
 import ProgramCard from "../components/ProgramCard.jsx";
 import SectionHeading from "../components/SectionHeading.jsx";
-import { assets } from "../data/siteData.js";
+import { assetMeta, assets } from "../data/siteData.js";
 import { useSiteContent } from "../hooks/useSiteContent.js";
 
 export default function Home() {
@@ -34,7 +34,14 @@ export default function Home() {
 
       <section className="section split-feature">
         <div className="split-media equipment-media">
-          <img src={assets.bocciaImage} alt="硬地滾球器材" />
+          <img
+            src={assets.bocciaImage}
+            alt={home.equipmentAlt}
+            width={assetMeta.bocciaImage.width}
+            height={assetMeta.bocciaImage.height}
+            loading="lazy"
+            decoding="async"
+          />
         </div>
         <div className="split-copy">
           <p className="section-kicker">{home.missionKicker}</p>

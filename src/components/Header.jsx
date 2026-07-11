@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { NavLink, Link, useLocation } from "react-router-dom";
-import { assets } from "../data/siteData.js";
+import { assetMeta, assets } from "../data/siteData.js";
 import { useSiteContent } from "../hooks/useSiteContent.js";
 
 export default function Header() {
@@ -13,7 +13,7 @@ export default function Header() {
   return (
     <header className="site-header">
       <Link className="brand" to={link("/")} onClick={closeNav} aria-label={content.brand.homeAria}>
-        <img src={assets.logo} alt={content.brand.logoAlt} />
+        <img src={assets.logo} alt={content.brand.logoAlt} width={assetMeta.logo.width} height={assetMeta.logo.height} />
         <span>
           <strong>{content.brand.name}</strong>
           {content.brand.subname ? <small>{content.brand.subname}</small> : null}

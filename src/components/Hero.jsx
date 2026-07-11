@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { assets } from "../data/siteData.js";
+import { assetMeta, assets } from "../data/siteData.js";
 import { useSiteContent } from "../hooks/useSiteContent.js";
 
 export default function Hero() {
@@ -8,7 +8,14 @@ export default function Hero() {
 
   return (
     <section className="hero">
-      <img className="hero-image" src={assets.promoActivity} alt={hero.imageAlt} />
+      <img
+        className="hero-image"
+        src={assets.promoActivity}
+        alt={hero.imageAlt}
+        width={assetMeta.promoActivity.width}
+        height={assetMeta.promoActivity.height}
+        fetchpriority="high"
+      />
       <div className="hero-overlay"></div>
       <div className="hero-copy">
         <p className="eyebrow light">{hero.kicker}</p>

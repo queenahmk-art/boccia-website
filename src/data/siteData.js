@@ -1,18 +1,26 @@
-import logo from "../../logo.png";
-import promoActivity from "../../推廣活動png.png";
-import coachTraining from "../../教練培訓.png";
-import rulesImage from "../../規則.png";
+import logo from "../assets/logo.png";
+import promoActivity from "../assets/promo-activity.jpg";
+import coachTraining from "../assets/coach-training.jpg";
+import rulesImage from "../assets/rules.jpg";
 import eventImage from "../../promo.jpg";
 import bocciaImage from "../../Boccia.jpg";
 
-export const assets = {
-  logo,
-  promoActivity,
-  coachTraining,
-  rulesImage,
-  eventImage,
-  bocciaImage,
+export const assetMeta = {
+  logo: { src: logo, width: 512, height: 512 },
+  promoActivity: { src: promoActivity, width: 1254, height: 1254 },
+  coachTraining: { src: coachTraining, width: 1448, height: 1086 },
+  rulesImage: { src: rulesImage, width: 1024, height: 1024 },
+  eventImage: { src: eventImage, width: 1024, height: 1024 },
+  bocciaImage: { src: bocciaImage, width: 400, height: 400 },
 };
+
+export const assets = Object.fromEntries(
+  Object.entries(assetMeta).map(([key, asset]) => [key, asset.src]),
+);
+
+export function getImageDimensions(source) {
+  return Object.values(assetMeta).find((asset) => asset.src === source) || {};
+}
 
 export const contact = {
   email: "bocciaassociationhkg@gmail.com",
@@ -79,6 +87,7 @@ export const siteContent = {
       missionTitle: "讓硬地滾球走進校園、企業及社區",
       missionCopy: "本會希望透過推廣活動、專業培訓及跨界合作，建立更完善的發展平台，讓不同年齡及能力人士都能參與硬地滾球。",
       missionAction: "關於本會",
+      equipmentAlt: "硬地滾球紅球、藍球及白色目標球",
       servicesKicker: "服務項目",
       servicesTitle: "本會服務",
       servicesCopy: "以清晰的服務分類支援學校、社福機構、企業及社區團體。",
@@ -125,6 +134,7 @@ export const siteContent = {
       title: "關於本會",
       intro: "中國香港硬地滾球總會成立宗旨，是希望推動硬地滾球普及化，讓這項運動不單局限於殘疾運動項目，而是成為任何年齡及能力人士都能參與的運動。",
       imageAlt: "硬地滾球活動現場",
+      platformImageAlt: "硬地滾球推廣活動",
       missionKicker: "本會使命",
       missionTitle: "我們的使命",
       paragraphs: [
@@ -146,6 +156,7 @@ export const siteContent = {
     rules: {
       kicker: "硬地滾球玩法",
       title: "",
+      pageH1: "硬地滾球基本玩法",
       intro: "硬地滾球是一項講求策略、專注力及準繩度的球類運動，適合不同年齡及不同能力人士參與。",
       imageAlt: "硬地滾球玩法示意",
       howKicker: "遊戲玩法",
@@ -196,6 +207,7 @@ export const siteContent = {
     partnership: {
       kicker: "合作機會",
       title: "",
+      pageH1: "硬地滾球合作計劃",
       intro: "本會積極與學校、企業、社福機構及社區團體合作，把硬地滾球帶到更多場景，策劃體驗、培訓與比賽。",
       imageAlt: "硬地滾球推廣合作活動",
       sectionKicker: "合作類型",
@@ -231,6 +243,7 @@ export const siteContent = {
     coaches: {
       kicker: "專業培訓",
       title: "",
+      pageH1: "硬地滾球教練及裁判培訓",
       intro: "中國香港硬地滾球總會致力建立完善的教練及裁判培訓制度，持續培育更多專業人才。",
       imageAlt: "硬地滾球教練及裁判培訓",
       standardKicker: "專業標準",
@@ -310,6 +323,7 @@ export const siteContent = {
       missionTitle: "Bringing boccia into schools, companies, and communities",
       missionCopy: "We build accessible participation pathways through outreach, training, and collaboration, so people of different ages and abilities can take part.",
       missionAction: "About Us",
+      equipmentAlt: "Red, blue, and white boccia balls",
       servicesKicker: "Programmes",
       servicesTitle: "Our Services",
       servicesCopy: "Clear service options for schools, social service groups, companies, and community organisations.",
@@ -356,6 +370,7 @@ export const siteContent = {
       title: "About the Association",
       intro: "The Association was founded to promote boccia as a sport that can be enjoyed by people of all ages and abilities, not only as a disability sport.",
       imageAlt: "Boccia activity session",
+      platformImageAlt: "Boccia outreach activity",
       missionKicker: "Our Mission",
       missionTitle: "Our Mission",
       paragraphs: [
@@ -377,6 +392,7 @@ export const siteContent = {
     rules: {
       kicker: "Boccia Rules",
       title: "",
+      pageH1: "How to Play Boccia",
       intro: "Boccia is a ball sport built on strategy, concentration, and precision. It is suitable for people of different ages and abilities.",
       imageAlt: "Boccia rules illustration",
       howKicker: "How to Play",
@@ -427,6 +443,7 @@ export const siteContent = {
     partnership: {
       kicker: "Partnership",
       title: "",
+      pageH1: "Boccia Partnership Programmes",
       intro: "We partner with schools, companies, social service organisations, and community groups to plan boccia experiences, training, and competitions.",
       imageAlt: "Boccia partnership activity",
       sectionKicker: "Service Types",
@@ -462,6 +479,7 @@ export const siteContent = {
     coaches: {
       kicker: "Coach & Referee",
       title: "",
+      pageH1: "Boccia Coach and Referee Training",
       intro: "The Association is committed to building a structured coach and referee training system and developing more professionals.",
       imageAlt: "Boccia coach and referee training",
       standardKicker: "Professional Standard",

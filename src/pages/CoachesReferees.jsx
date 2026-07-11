@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import SectionHeading from "../components/SectionHeading.jsx";
-import { assets } from "../data/siteData.js";
+import { assetMeta, assets } from "../data/siteData.js";
 import { useSiteContent } from "../hooks/useSiteContent.js";
 
 export default function CoachesReferees() {
@@ -10,10 +10,16 @@ export default function CoachesReferees() {
   return (
     <>
       <section className="page-hero image-page-hero">
-        <img src={assets.coachTraining} alt={page.imageAlt} />
+        <img
+          src={assets.coachTraining}
+          alt={page.imageAlt}
+          width={assetMeta.coachTraining.width}
+          height={assetMeta.coachTraining.height}
+          fetchpriority="high"
+        />
         <div>
           <p className="eyebrow light">{page.kicker}</p>
-          {page.title ? <h1>{page.title}</h1> : null}
+          {page.title ? <h1>{page.title}</h1> : <h1 className="sr-only">{page.pageH1}</h1>}
           <p>{page.intro}</p>
         </div>
       </section>
