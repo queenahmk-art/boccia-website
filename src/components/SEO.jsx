@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { getHomepageStructuredData, getSeo, OG_IMAGE_URL } from "../data/seo.js";
+import { getSeo, getStructuredData, OG_IMAGE_URL } from "../data/seo.js";
 
 function upsertMeta(attribute, name, content) {
   let element = document.head.querySelector(`meta[${attribute}="${name}"]`);
@@ -31,7 +31,7 @@ export default function SEO() {
 
   useEffect(() => {
     const seo = getSeo(pathname);
-    const structuredData = getHomepageStructuredData(pathname);
+    const structuredData = getStructuredData(pathname);
     document.documentElement.lang = seo.lang;
     document.title = seo.title;
 

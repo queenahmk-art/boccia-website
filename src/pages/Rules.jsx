@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import FeatureStrip from "../components/FeatureStrip.jsx";
 import RuleCard from "../components/RuleCard.jsx";
 import SectionHeading from "../components/SectionHeading.jsx";
@@ -5,7 +6,7 @@ import { assetMeta, assets } from "../data/siteData.js";
 import { useSiteContent } from "../hooks/useSiteContent.js";
 
 export default function Rules() {
-  const { content } = useSiteContent();
+  const { content, link } = useSiteContent();
   const { rules } = content;
 
   return (
@@ -31,6 +32,9 @@ export default function Rules() {
           {rules.paragraphs.map((paragraph) => (
             <p key={paragraph}>{paragraph}</p>
           ))}
+          <Link className="knowledge-text-link" to={link("/knowledge/what-is-boccia")}>
+            {rules.knowledgeAction}
+          </Link>
         </div>
       </section>
 

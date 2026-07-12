@@ -1,7 +1,7 @@
 import { access, readFile, readdir } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { SITE_URL, getHomepageStructuredData, getSeo, staticRoutes } from "../src/data/seo.js";
+import { SITE_URL, getSeo, getStructuredData, staticRoutes } from "../src/data/seo.js";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const dist = path.join(root, "dist");
@@ -49,7 +49,7 @@ function assertIncludes(scope, html, value, label) {
 
 function validateJsonLd(scope, html, seo) {
   const scripts = [...html.matchAll(/<script type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)];
-  const expected = getHomepageStructuredData(seo.path);
+  const expected = getStructuredData(seo.path);
 
   if (!expected) {
     if (scripts.length) {
@@ -66,7 +66,13 @@ function validateJsonLd(scope, html, seo) {
   try {
     const data = JSON.parse(scripts[0][1]);
     const graph = data["@graph"];
-    const expectedTypes = ["Organization", "SportsOrganization", "WebSite", "WebPage"];
+    const isArticle = seo.path.endsWith("/what-is-boccia");
+    const isKnowledgeIndex = seo.path === "/knowledge" || seo.path === "/en/knowledge";
+    const expectedTypes = isArticle
+      ? ["Article", "WebPage", "BreadcrumbList"]
+      : isKnowledgeIndex
+        ? ["WebPage", "BreadcrumbList"]
+        : ["Organization", "SportsOrganization", "WebSite", "WebPage"];
     const types = Array.isArray(graph) ? graph.map((item) => item["@type"]) : [];
 
     for (const type of expectedTypes) {
@@ -85,6 +91,15 @@ function validateJsonLd(scope, html, seo) {
           fail(scope, `JSON-LD contains an unexpected URL: ${value}`);
         }
       }
+    }
+
+    if (isArticle) {
+      const article = graph.find((item) => item["@type"] === "Article");
+      for (const field of ["headline", "description", "mainEntityOfPage", "inLanguage", "datePublished", "dateModified", "author", "publisher", "url"]) {
+        if (!article?.[field]) fail(scope, `Article JSON-LD is missing ${field}`);
+      }
+      const breadcrumb = graph.find((item) => item["@type"] === "BreadcrumbList");
+      if (!breadcrumb?.itemListElement?.length) fail(scope, "Article JSON-LD is missing breadcrumb items");
     }
   } catch (error) {
     fail(scope, `invalid JSON-LD: ${error.message}`);
@@ -152,7 +167,7 @@ async function validateStaticFiles() {
 
   const rootEntries = await readdir(dist, { withFileTypes: true });
   const routeDirectories = rootEntries.filter((entry) => entry.isDirectory() && entry.name !== "assets" && entry.name !== ".vite").map((entry) => entry.name);
-  const expectedDirectories = ["about", "rules", "services", "partnership", "coaches-referees", "contact", "en"];
+  const expectedDirectories = ["about", "rules", "services", "partnership", "coaches-referees", "contact", "knowledge", "en"];
   for (const directory of routeDirectories) {
     if (!expectedDirectories.includes(directory)) fail("dist", `unexpected route directory: ${directory}`);
   }
@@ -191,12 +206,25 @@ for (const route of staticRoutes) {
   await validateRoute(route);
 }
 
+const titles = staticRoutes.map((route) => getSeo(route).title);
+if (new Set(titles).size !== titles.length) fail("SEO metadata", "contains duplicate page titles");
+
 await validateSitemap();
 await validateStaticFiles();
 
 const rulesHtml = await readRequired(path.join("rules", "index.html"));
 for (const phrase of ["硬地滾球基本玩法", "白色目標球", "紅方", "藍方", "分數", "勝出", "策略", "專注", "準繩"]) {
   if (!rulesHtml.includes(phrase)) fail("/rules", `initial HTML is missing required topic: ${phrase}`);
+}
+
+for (const route of ["/knowledge/what-is-boccia", "/en/knowledge/what-is-boccia"]) {
+  const html = await readRequired(path.join(route.slice(1), "index.html"));
+  const requiredPhrases = route.startsWith("/en/")
+    ? ["What Is Boccia?", "How Is Boccia Played?", "What Equipment Is Used in Boccia?", "Would you like to learn more about Boccia?"]
+    : ["什麼是硬地滾球（Boccia）？", "硬地滾球如何進行？", "硬地滾球使用什麼球具？", "想進一步了解硬地滾球？"];
+  for (const phrase of requiredPhrases) {
+    if (!html.includes(phrase)) fail(route, `initial HTML is missing article content: ${phrase}`);
+  }
 }
 
 if (issues.length) {

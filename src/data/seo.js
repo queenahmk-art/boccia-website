@@ -30,6 +30,14 @@ const zh = {
     title: "聯絡中國香港硬地滾球總會｜活動及課程查詢",
     description: "查詢硬地滾球推廣活動、學校服務、企業活動、教練及裁判培訓、比賽合作及球具服務。",
   },
+  "/knowledge": {
+    title: "硬地滾球知識｜玩法、好處及教學文章",
+    description: "閱讀中國香港硬地滾球總會的硬地滾球知識文章，了解 Boccia 玩法、特色、好處、教練及裁判發展。",
+  },
+  "/knowledge/what-is-boccia": {
+    title: "什麼是硬地滾球（Boccia）？玩法、球具及比賽形式｜中國香港硬地滾球總會",
+    description: "什麼是硬地滾球？本文介紹 Boccia 的基本玩法、紅藍球及白色目標球 Jack、個人賽、雙人賽和團體賽，以及適合參與的人士。",
+  },
 };
 
 const en = {
@@ -60,6 +68,14 @@ const en = {
   "/en/contact": {
     title: "Contact the Boccia Association of Hong Kong, China｜Enquiries",
     description: "Contact the Association about boccia activities, school and corporate programmes, training, competitions, partnerships, and equipment services.",
+  },
+  "/en/knowledge": {
+    title: "Boccia Knowledge｜Rules, Benefits and Learning Resources",
+    description: "Explore Boccia learning resources from the Boccia Association of Hong Kong, China, including rules, benefits and professional development.",
+  },
+  "/en/knowledge/what-is-boccia": {
+    title: "What Is Boccia? Rules, Equipment and Competition Formats｜Boccia Hong Kong",
+    description: "Discover what Boccia is, how the sport is played, the red and blue balls and white Jack, its competition formats, and who can take part.",
   },
 };
 
@@ -184,4 +200,93 @@ export function getHomepageStructuredData(pathname) {
       },
     ],
   };
+}
+
+function getBreadcrumbStructuredData(seo, labels) {
+  return {
+    "@type": "BreadcrumbList",
+    "@id": `${seo.canonical}#breadcrumb`,
+    itemListElement: labels.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: `${SITE_URL}${item.path === "/" ? "/" : `${item.path}/`}`,
+    })),
+  };
+}
+
+export function getStructuredData(pathname) {
+  const seo = getSeo(pathname);
+  const article = seo.path.endsWith("/what-is-boccia")
+    ? { title: seo.title, publishedDate: "2026-07-12" }
+    : null;
+  if (article) {
+    const isEnglish = seo.language === "en";
+    const labels = isEnglish
+      ? [
+          { name: "Home", path: "/en" },
+          { name: "Boccia Knowledge", path: "/en/knowledge" },
+          { name: article.title, path: seo.path },
+        ]
+      : [
+          { name: "首頁", path: "/" },
+          { name: "硬地滾球知識", path: "/knowledge" },
+          { name: article.title, path: seo.path },
+        ];
+    const organisationName = isEnglish ? "The Boccia Association of Hong Kong, China" : "中國香港硬地滾球總會";
+    const organisationUrl = `${SITE_URL}/`;
+    const webpage = {
+      "@type": "WebPage",
+      "@id": `${seo.canonical}#webpage`,
+      url: seo.canonical,
+      name: seo.title,
+      description: seo.description,
+      inLanguage: seo.lang,
+      isPartOf: { "@id": `${SITE_URL}/#website` },
+    };
+    return {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Article",
+          "@id": `${seo.canonical}#article`,
+          headline: article.title,
+          description: seo.description,
+          mainEntityOfPage: { "@id": `${seo.canonical}#webpage` },
+          inLanguage: seo.lang,
+          datePublished: article.publishedDate,
+          dateModified: article.publishedDate,
+          author: { "@type": "Organization", name: organisationName, url: organisationUrl },
+          publisher: { "@type": "Organization", name: organisationName, url: organisationUrl },
+          image: OG_IMAGE_URL,
+          url: seo.canonical,
+        },
+        webpage,
+        getBreadcrumbStructuredData(seo, labels),
+      ],
+    };
+  }
+
+  if (seo.path === "/knowledge" || seo.path === "/en/knowledge") {
+    const isEnglish = seo.language === "en";
+    const labels = isEnglish
+      ? [{ name: "Home", path: "/en" }, { name: "Boccia Knowledge", path: "/en/knowledge" }]
+      : [{ name: "首頁", path: "/" }, { name: "硬地滾球知識", path: "/knowledge" }];
+    return {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebPage",
+          "@id": `${seo.canonical}#webpage`,
+          url: seo.canonical,
+          name: seo.title,
+          description: seo.description,
+          inLanguage: seo.lang,
+        },
+        getBreadcrumbStructuredData(seo, labels),
+      ],
+    };
+  }
+
+  return getHomepageStructuredData(pathname);
 }

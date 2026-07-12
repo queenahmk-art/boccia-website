@@ -22,6 +22,12 @@
     <loc>https://hkboccia.com.hk/contact/</loc>
   </url>
   <url>
+    <loc>https://hkboccia.com.hk/knowledge/</loc>
+  </url>
+  <url>
+    <loc>https://hkboccia.com.hk/knowledge/what-is-boccia/</loc>
+  </url>
+  <url>
     <loc>https://hkboccia.com.hk/en/</loc>
   </url>
   <url>
@@ -41,5 +47,11 @@
   </url>
   <url>
     <loc>https://hkboccia.com.hk/en/contact/</loc>
+  </url>
+  <url>
+    <loc>https://hkboccia.com.hk/en/knowledge/</loc>
+  </url>
+  <url>
+    <loc>https://hkboccia.com.hk/en/knowledge/what-is-boccia/</loc>
   </url>
 </urlset>

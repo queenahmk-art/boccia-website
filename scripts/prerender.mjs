@@ -2,7 +2,7 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { createServer } from "vite";
-import { getHomepageStructuredData, getSeo, OG_IMAGE_URL, staticRoutes } from "../src/data/seo.js";
+import { getSeo, getStructuredData, OG_IMAGE_URL, staticRoutes } from "../src/data/seo.js";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const dist = path.join(root, "dist");
@@ -57,7 +57,7 @@ function getRuntimeTags(template) {
 
 function renderDocument(template, route, appHtml) {
   const seo = getSeo(route);
-  const head = createHead(seo, getRuntimeTags(template), getHomepageStructuredData(route));
+  const head = createHead(seo, getRuntimeTags(template), getStructuredData(route));
   const rootTag = '<div id="root"></div>';
 
   if (!template.includes(rootTag)) {
