@@ -1009,6 +1009,10 @@ p {
   font-weight: 750;
 }
 
+.knowledge-back-link {
+  margin-top: 24px;
+}
+
 .knowledge-article-layout {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(220px, 300px);

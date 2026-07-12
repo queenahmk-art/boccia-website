@@ -54,6 +54,9 @@ export default function KnowledgeArticle() {
               {lang === "en" ? "Updated" : "更新日期"}: {article.publishedDate}
             </time>
           </div>
+          <Link className="btn secondary knowledge-back-link" to={link("/knowledge")}>
+            {lang === "en" ? "Back to Boccia Knowledge" : "返回硬地滾球知識"}
+          </Link>
         </header>
 
         <div className="knowledge-article-layout">
