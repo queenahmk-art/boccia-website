@@ -150,12 +150,12 @@ const baseArticle = {
   imageHeight: assetMeta.bocciaImage.height,
 };
 
-export const knowledgeArticles = {
+export const bocciaArticles = {
   zh: [
     {
       ...baseArticle,
-      path: "/knowledge/what-is-boccia",
-      category: "硬地滾球入門",
+      path: "/rules/what-is-boccia",
+      category: "認識硬地滾球",
       title: "什麼是硬地滾球（Boccia）？",
       intro: "一項結合策略、技巧與專注力的運動",
       description: "什麼是硬地滾球？本文介紹 Boccia 的基本玩法、紅藍球及白色目標球 Jack、個人賽、雙人賽和團體賽，以及適合參與的人士。",
@@ -174,8 +174,8 @@ export const knowledgeArticles = {
   en: [
     {
       ...baseArticle,
-      path: "/en/knowledge/what-is-boccia",
-      category: "Boccia Basics",
+      path: "/en/rules/what-is-boccia",
+      category: "About Boccia",
       title: "What Is Boccia?",
       intro: "A sport of strategy, precision and focus",
       description: "Discover what Boccia is, how the sport is played, the red and blue balls and white Jack, its competition formats, and who can take part.",
@@ -193,26 +193,7 @@ export const knowledgeArticles = {
   ],
 };
 
-export const knowledgeIndex = {
-  zh: {
-    path: "/knowledge",
-    kicker: "硬地滾球知識",
-    title: "硬地滾球知識",
-    intro: "從基本玩法、球具到比賽形式，逐步認識硬地滾球這項結合策略、技巧及專注力的運動。",
-    articleLabel: "文章",
-    readMore: "閱讀文章",
-  },
-  en: {
-    path: "/en/knowledge",
-    kicker: "Boccia Knowledge",
-    title: "Boccia Knowledge",
-    intro: "Explore the basics, equipment and competition formats of Boccia, a sport built on strategy, precision and focus.",
-    articleLabel: "Article",
-    readMore: "Read article",
-  },
-};
-
-export function getKnowledgeArticle(pathname, language) {
+export function getBocciaArticle(pathname, language) {
   const path = pathname.replace(/\/$/, "") || "/";
-  return knowledgeArticles[language].find((article) => article.path === path) || null;
+  return bocciaArticles[language].find((article) => article.path === path) || null;
 }

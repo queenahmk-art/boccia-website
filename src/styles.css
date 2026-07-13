@@ -902,56 +902,25 @@ p {
   font-size: var(--page-hero-copy-size);
 }
 
-.knowledge-hero {
-  background: var(--mist);
-}
-
-.knowledge-list-section {
-  background: var(--mist);
-}
-
-.knowledge-grid {
+.rules-article-section {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 22px;
-}
-
-.knowledge-card {
-  display: grid;
-  grid-template-columns: minmax(160px, 0.7fr) minmax(0, 1.3fr);
-  min-width: 0;
-  border: 1px solid var(--line);
+  grid-template-columns: minmax(0, 1.15fr) minmax(240px, 0.85fr);
+  gap: clamp(30px, 6vw, 82px);
+  align-items: center;
   background: var(--paper);
-  box-shadow: 0 16px 36px rgba(7, 8, 13, 0.08);
 }
 
-.knowledge-card > img {
+.rules-article-section .section-heading {
+  margin-bottom: 26px;
+}
+
+.rules-article-section img {
   width: 100%;
-  height: 100%;
-  min-height: 220px;
-  object-fit: cover;
-}
-
-.knowledge-card-copy {
-  display: flex;
-  min-width: 0;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: clamp(22px, 3vw, 32px);
-}
-
-.knowledge-card-copy h2 {
-  margin-bottom: 12px;
-  font-size: clamp(1.4rem, 2.1vw, 2.2rem);
-  line-height: 1.12;
-}
-
-.knowledge-card-copy > p:not(.program-label) {
-  color: var(--muted);
-}
-
-.knowledge-card-copy .btn {
-  margin-top: auto;
+  aspect-ratio: 1;
+  padding: clamp(16px, 3vw, 30px);
+  border: 1px solid var(--line);
+  background: var(--mist);
+  object-fit: contain;
 }
 
 .knowledge-article {
@@ -1442,7 +1411,8 @@ p {
   .split-feature,
   .editorial-section,
   .contact-layout,
-  .site-footer {
+  .site-footer,
+  .rules-article-section {
     grid-template-columns: 1fr;
   }
 
@@ -1615,7 +1585,6 @@ p {
   .offer-grid,
   .partnership-grid,
   .pathway-grid,
-  .knowledge-grid,
   .form-grid {
     grid-template-columns: 1fr;
   }
@@ -1646,14 +1615,6 @@ p {
   .footer-contact {
     display: grid;
     justify-content: stretch;
-  }
-
-  .knowledge-card {
-    grid-template-columns: minmax(116px, 0.7fr) minmax(0, 1.3fr);
-  }
-
-  .knowledge-card > img {
-    min-height: 190px;
   }
 
   .knowledge-article-layout,

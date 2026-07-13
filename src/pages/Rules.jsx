@@ -32,9 +32,6 @@ export default function Rules() {
           {rules.paragraphs.map((paragraph) => (
             <p key={paragraph}>{paragraph}</p>
           ))}
-          <Link className="knowledge-text-link" to={link("/knowledge/what-is-boccia")}>
-            {rules.knowledgeAction}
-          </Link>
         </div>
       </section>
 
@@ -52,6 +49,23 @@ export default function Rules() {
             <RuleCard key={step.title} step={step} index={index} />
           ))}
         </div>
+      </section>
+
+      <section className="section rules-article-section">
+        <div>
+          <SectionHeading kicker={rules.articleKicker} title={rules.articleTitle} copy={rules.articleCopy} />
+          <Link className="btn secondary" to={link("/rules/what-is-boccia")}>
+            {rules.articleAction}
+          </Link>
+        </div>
+        <img
+          src={assets.bocciaImage}
+          alt={rules.articleImageAlt}
+          width={assetMeta.bocciaImage.width}
+          height={assetMeta.bocciaImage.height}
+          loading="lazy"
+          decoding="async"
+        />
       </section>
     </>
   );

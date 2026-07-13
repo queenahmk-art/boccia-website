@@ -50,8 +50,8 @@ export default function Home() {
           <Link className="btn secondary" to={link("/about")}>
             {home.missionAction}
           </Link>
-          <Link className="knowledge-text-link" to={link("/knowledge/what-is-boccia")}>
-            {home.knowledgeAction}
+          <Link className="knowledge-text-link" to={link("/rules/what-is-boccia")}>
+            {home.articleAction}
           </Link>
         </div>
       </section>

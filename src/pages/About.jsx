@@ -49,9 +49,6 @@ export default function About() {
           <Link className="btn secondary" to={link("/partnership")}>
             {about.platformAction}
           </Link>
-          <Link className="knowledge-text-link" to={link("/knowledge/what-is-boccia")}>
-            {about.knowledgeAction}
-          </Link>
         </div>
         <div className="split-media">
           <img

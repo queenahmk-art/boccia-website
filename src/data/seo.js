@@ -30,11 +30,7 @@ const zh = {
     title: "聯絡中國香港硬地滾球總會｜活動及課程查詢",
     description: "查詢硬地滾球推廣活動、學校服務、企業活動、教練及裁判培訓、比賽合作及球具服務。",
   },
-  "/knowledge": {
-    title: "硬地滾球知識｜玩法、好處及教學文章",
-    description: "閱讀中國香港硬地滾球總會的硬地滾球知識文章，了解 Boccia 玩法、特色、好處、教練及裁判發展。",
-  },
-  "/knowledge/what-is-boccia": {
+  "/rules/what-is-boccia": {
     title: "什麼是硬地滾球（Boccia）？玩法、球具及比賽形式｜中國香港硬地滾球總會",
     description: "什麼是硬地滾球？本文介紹 Boccia 的基本玩法、紅藍球及白色目標球 Jack、個人賽、雙人賽和團體賽，以及適合參與的人士。",
   },
@@ -69,11 +65,7 @@ const en = {
     title: "Contact the Boccia Association of Hong Kong, China｜Enquiries",
     description: "Contact the Association about boccia activities, school and corporate programmes, training, competitions, partnerships, and equipment services.",
   },
-  "/en/knowledge": {
-    title: "Boccia Knowledge｜Rules, Benefits and Learning Resources",
-    description: "Explore Boccia learning resources from the Boccia Association of Hong Kong, China, including rules, benefits and professional development.",
-  },
-  "/en/knowledge/what-is-boccia": {
+  "/en/rules/what-is-boccia": {
     title: "What Is Boccia? Rules, Equipment and Competition Formats｜Boccia Hong Kong",
     description: "Discover what Boccia is, how the sport is played, the red and blue balls and white Jack, its competition formats, and who can take part.",
   },
@@ -225,12 +217,12 @@ export function getStructuredData(pathname) {
     const labels = isEnglish
       ? [
           { name: "Home", path: "/en" },
-          { name: "Boccia Knowledge", path: "/en/knowledge" },
+          { name: "About Boccia", path: "/en/rules" },
           { name: article.title, path: seo.path },
         ]
       : [
           { name: "首頁", path: "/" },
-          { name: "硬地滾球知識", path: "/knowledge" },
+          { name: "認識硬地滾球", path: "/rules" },
           { name: article.title, path: seo.path },
         ];
     const organisationName = isEnglish ? "The Boccia Association of Hong Kong, China" : "中國香港硬地滾球總會";
@@ -262,27 +254,6 @@ export function getStructuredData(pathname) {
           url: seo.canonical,
         },
         webpage,
-        getBreadcrumbStructuredData(seo, labels),
-      ],
-    };
-  }
-
-  if (seo.path === "/knowledge" || seo.path === "/en/knowledge") {
-    const isEnglish = seo.language === "en";
-    const labels = isEnglish
-      ? [{ name: "Home", path: "/en" }, { name: "Boccia Knowledge", path: "/en/knowledge" }]
-      : [{ name: "首頁", path: "/" }, { name: "硬地滾球知識", path: "/knowledge" }];
-    return {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "WebPage",
-          "@id": `${seo.canonical}#webpage`,
-          url: seo.canonical,
-          name: seo.title,
-          description: seo.description,
-          inLanguage: seo.lang,
-        },
         getBreadcrumbStructuredData(seo, labels),
       ],
     };

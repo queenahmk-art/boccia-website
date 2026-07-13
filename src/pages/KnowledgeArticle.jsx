@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { assetMeta, assets } from "../data/siteData.js";
-import { getKnowledgeArticle } from "../data/articles.js";
+import { getBocciaArticle } from "../data/articles.js";
 import { useSiteContent } from "../hooks/useSiteContent.js";
 
 function ArticleSection({ section }) {
@@ -29,7 +29,7 @@ export default function KnowledgeArticle() {
   const { lang, link } = useSiteContent();
   const { pathname: locationPath } = useLocation();
   const pathname = locationPath.replace(/\/$/, "") || "/";
-  const article = getKnowledgeArticle(pathname, lang);
+  const article = getBocciaArticle(pathname, lang);
 
   if (!article) return null;
 
@@ -39,7 +39,7 @@ export default function KnowledgeArticle() {
         <div className="knowledge-breadcrumb" aria-label={lang === "en" ? "Breadcrumb" : "麵包屑導覽"}>
           <Link to={link("/")}>{lang === "en" ? "Home" : "首頁"}</Link>
           <span aria-hidden="true">/</span>
-          <Link to={link("/knowledge")}>{lang === "en" ? "Boccia Knowledge" : "硬地滾球知識"}</Link>
+          <Link to={link("/rules")}>{lang === "en" ? "About Boccia" : "認識硬地滾球"}</Link>
           <span aria-hidden="true">/</span>
           <span>{article.title}</span>
         </div>
@@ -54,8 +54,8 @@ export default function KnowledgeArticle() {
               {lang === "en" ? "Updated" : "更新日期"}: {article.publishedDate}
             </time>
           </div>
-          <Link className="btn secondary knowledge-back-link" to={link("/knowledge")}>
-            {lang === "en" ? "Back to Boccia Knowledge" : "返回硬地滾球知識"}
+          <Link className="btn secondary knowledge-back-link" to={link("/rules")}>
+            {lang === "en" ? "Back to About Boccia" : "返回認識硬地滾球"}
           </Link>
         </header>
 

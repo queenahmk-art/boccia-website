@@ -67,12 +67,9 @@ function validateJsonLd(scope, html, seo) {
     const data = JSON.parse(scripts[0][1]);
     const graph = data["@graph"];
     const isArticle = seo.path.endsWith("/what-is-boccia");
-    const isKnowledgeIndex = seo.path === "/knowledge" || seo.path === "/en/knowledge";
     const expectedTypes = isArticle
       ? ["Article", "WebPage", "BreadcrumbList"]
-      : isKnowledgeIndex
-        ? ["WebPage", "BreadcrumbList"]
-        : ["Organization", "SportsOrganization", "WebSite", "WebPage"];
+      : ["Organization", "SportsOrganization", "WebSite", "WebPage"];
     const types = Array.isArray(graph) ? graph.map((item) => item["@type"]) : [];
 
     for (const type of expectedTypes) {
@@ -167,7 +164,7 @@ async function validateStaticFiles() {
 
   const rootEntries = await readdir(dist, { withFileTypes: true });
   const routeDirectories = rootEntries.filter((entry) => entry.isDirectory() && entry.name !== "assets" && entry.name !== ".vite").map((entry) => entry.name);
-  const expectedDirectories = ["about", "rules", "services", "partnership", "coaches-referees", "contact", "knowledge", "en"];
+  const expectedDirectories = ["about", "rules", "services", "partnership", "coaches-referees", "contact", "en"];
   for (const directory of routeDirectories) {
     if (!expectedDirectories.includes(directory)) fail("dist", `unexpected route directory: ${directory}`);
   }
@@ -217,7 +214,7 @@ for (const phrase of ["硬地滾球基本玩法", "白色目標球", "紅方", "
   if (!rulesHtml.includes(phrase)) fail("/rules", `initial HTML is missing required topic: ${phrase}`);
 }
 
-for (const route of ["/knowledge/what-is-boccia", "/en/knowledge/what-is-boccia"]) {
+for (const route of ["/rules/what-is-boccia", "/en/rules/what-is-boccia"]) {
   const html = await readRequired(path.join(route.slice(1), "index.html"));
   const requiredPhrases = route.startsWith("/en/")
     ? ["What Is Boccia?", "How Is Boccia Played?", "What Equipment Is Used in Boccia?", "Would you like to learn more about Boccia?"]
@@ -225,6 +222,16 @@ for (const route of ["/knowledge/what-is-boccia", "/en/knowledge/what-is-boccia"
   for (const phrase of requiredPhrases) {
     if (!html.includes(phrase)) fail(route, `initial HTML is missing article content: ${phrase}`);
   }
+}
+
+for (const route of staticRoutes) {
+  if (route.startsWith("/knowledge")) fail("routes", `legacy Knowledge route remains: ${route}`);
+}
+
+for (const route of ["/rules", "/en/rules"]) {
+  const html = await readRequired(path.join(route.slice(1), "index.html"));
+  const phrase = route.startsWith("/en/") ? "What Is Boccia?" : "什麼是硬地滾球（Boccia）？";
+  if (!html.includes(phrase)) fail(route, "is missing the related Boccia article extension");
 }
 
 if (issues.length) {
