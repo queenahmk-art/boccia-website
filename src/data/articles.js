@@ -1,3 +1,4 @@
+import bocciaChildrenImage from "../assets/boccia-children.png";
 import { assetMeta, assets } from "./siteData.js";
 
 const sharedSections = {
@@ -145,9 +146,9 @@ const sharedSections = {
 const baseArticle = {
   slug: "what-is-boccia",
   publishedDate: "2026-07-12",
-  image: assets.bocciaImage,
-  imageWidth: assetMeta.bocciaImage.width,
-  imageHeight: assetMeta.bocciaImage.height,
+  image: bocciaChildrenImage,
+  imageWidth: 1254,
+  imageHeight: 1254,
 };
 
 export const bocciaArticles = {
@@ -159,10 +160,9 @@ export const bocciaArticles = {
       title: "什麼是硬地滾球（Boccia）？",
       description: "什麼是硬地滾球？本文介紹 Boccia 的基本玩法、紅藍球及白色目標球 Jack、個人賽、雙人賽和團體賽，以及適合參與的人士。",
       publishedBy: "中國香港硬地滾球總會",
-      imageAlt: "硬地滾球紅球、藍球及白色目標球 Jack",
+      imageAlt: "兩名小朋友手持紅色及藍色硬地滾球",
       sections: sharedSections.zh,
-      ctaTitle: "需要策劃校園、企業或社區體驗？",
-      ctaCopy: "提供活動目標、日期、參加人數及場地資料，本會可協助規劃合適形式。",
+      ctaTitle: "歡迎提供活動對象、日期、參加人數及場地資料，本會可協助規劃合適形式。",
       ctaAction: "查詢合作",
       ctaPath: "/contact",
     },
@@ -175,10 +175,9 @@ export const bocciaArticles = {
       title: "What Is Boccia?",
       description: "Discover what Boccia is, how the sport is played, the red and blue balls and white Jack, its competition formats, and who can take part.",
       publishedBy: "The Boccia Association of Hong Kong, China",
-      imageAlt: "Red and blue Boccia balls with the white Jack",
+      imageAlt: "Two children holding red and blue Boccia balls",
       sections: sharedSections.en,
-      ctaTitle: "Planning a school, corporate, or community experience?",
-      ctaCopy: "Share your objectives, date, participant number, and venue details so we can help plan a suitable format.",
+      ctaTitle: "Please share the activity audience, date, number of participants, and venue details. We can help plan a suitable format.",
       ctaAction: "Enquire about partnership",
       ctaPath: "/contact",
     },

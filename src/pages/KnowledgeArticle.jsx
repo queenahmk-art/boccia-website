@@ -85,7 +85,6 @@ export default function KnowledgeArticle() {
       <section className="cta-section article-cta">
         <div>
           <h2>{article.ctaTitle}</h2>
-          <p>{article.ctaCopy}</p>
         </div>
         <Link className="btn primary light" to={link(article.ctaPath)}>
           {article.ctaAction}

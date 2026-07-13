@@ -217,8 +217,8 @@ for (const phrase of ["硬地滾球基本玩法", "白色目標球", "紅方", "
 for (const route of ["/rules/what-is-boccia", "/en/rules/what-is-boccia"]) {
   const html = await readRequired(path.join(route.slice(1), "index.html"));
   const requiredPhrases = route.startsWith("/en/")
-    ? ["What Is Boccia?", "How Is Boccia Played?", "What Equipment Is Used in Boccia?", "Planning a school, corporate, or community experience?"]
-    : ["什麼是硬地滾球（Boccia）？", "硬地滾球如何進行？", "硬地滾球使用什麼球具？", "需要策劃校園、企業或社區體驗？"];
+    ? ["What Is Boccia?", "How Is Boccia Played?", "What Equipment Is Used in Boccia?", "Please share the activity audience, date, number of participants, and venue details. We can help plan a suitable format."]
+    : ["什麼是硬地滾球（Boccia）？", "硬地滾球如何進行？", "硬地滾球使用什麼球具？", "歡迎提供活動對象、日期、參加人數及場地資料，本會可協助規劃合適形式。"];
   for (const phrase of requiredPhrases) {
     if (!html.includes(phrase)) fail(route, `initial HTML is missing article content: ${phrase}`);
   }
