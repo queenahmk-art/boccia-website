@@ -13,7 +13,7 @@ export default function Footer() {
         {content.brand.subname ? <p>{content.brand.subname}</p> : null}
       </div>
       <nav className="footer-nav" aria-label="頁尾導覽">
-        {content.navItems.slice(0, -1).map((item) => (
+        {content.navItems.map((item) => (
           <Link key={item.path} to={link(item.path)}>
             {item.label}
           </Link>
@@ -23,7 +23,7 @@ export default function Footer() {
         <a href={`mailto:${contact.email}`}>
           {content.contactPage.emailLabel}: {contact.email}
         </a>
-        <a href={contact.whatsappUrl}>
+        <a href={contact.whatsappUrl} target="_blank" rel="noreferrer">
           {content.contactPage.phoneLabel}: {contact.phone}
         </a>
       </div>

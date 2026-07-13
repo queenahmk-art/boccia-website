@@ -53,7 +53,7 @@ export default function Rules() {
 
       <section className="section rules-article-section">
         <div>
-          <SectionHeading kicker={rules.articleKicker} title={rules.articleTitle} copy={rules.articleCopy} />
+          <SectionHeading kicker={rules.articleKicker} copy={rules.articleCopy} />
           <Link className="btn secondary" to={link("/rules/what-is-boccia")}>
             {rules.articleAction}
           </Link>

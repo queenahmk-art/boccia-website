@@ -46,8 +46,7 @@ export default function KnowledgeArticle() {
 
         <header className="knowledge-article-header">
           <p className="eyebrow">{article.category}</p>
-          <h1>{article.title}</h1>
-          <p className="knowledge-article-intro">{article.intro}</p>
+          <h1 className="sr-only">{article.title}</h1>
           <div className="knowledge-article-meta">
             <span>{lang === "en" ? "Published by" : "發布機構"}: {article.publishedBy}</span>
             <time dateTime={article.publishedDate}>
@@ -79,24 +78,18 @@ export default function KnowledgeArticle() {
               loading="lazy"
               decoding="async"
             />
-            <p className="program-label">{article.category}</p>
-            <p>{lang === "en" ? "An introductory guide for people who want to discover Boccia." : "為想認識硬地滾球的人士而設的入門介紹。"}</p>
           </aside>
         </div>
       </article>
 
-      <section className="section knowledge-cta">
+      <section className="cta-section article-cta">
         <div>
-          <p className="section-kicker">{lang === "en" ? "Learn more" : "延伸了解"}</p>
           <h2>{article.ctaTitle}</h2>
+          <p>{article.ctaCopy}</p>
         </div>
-        <div className="knowledge-related-links">
-          {article.relatedLinks.map((item) => (
-            <Link className="btn light" key={item.path} to={link(item.path)}>
-              {item.label}
-            </Link>
-          ))}
-        </div>
+        <Link className="btn primary light" to={link(article.ctaPath)}>
+          {article.ctaAction}
+        </Link>
       </section>
     </>
   );

@@ -217,8 +217,8 @@ for (const phrase of ["硬地滾球基本玩法", "白色目標球", "紅方", "
 for (const route of ["/rules/what-is-boccia", "/en/rules/what-is-boccia"]) {
   const html = await readRequired(path.join(route.slice(1), "index.html"));
   const requiredPhrases = route.startsWith("/en/")
-    ? ["What Is Boccia?", "How Is Boccia Played?", "What Equipment Is Used in Boccia?", "Would you like to learn more about Boccia?"]
-    : ["什麼是硬地滾球（Boccia）？", "硬地滾球如何進行？", "硬地滾球使用什麼球具？", "想進一步了解硬地滾球？"];
+    ? ["What Is Boccia?", "How Is Boccia Played?", "What Equipment Is Used in Boccia?", "Planning a school, corporate, or community experience?"]
+    : ["什麼是硬地滾球（Boccia）？", "硬地滾球如何進行？", "硬地滾球使用什麼球具？", "需要策劃校園、企業或社區體驗？"];
   for (const phrase of requiredPhrases) {
     if (!html.includes(phrase)) fail(route, `initial HTML is missing article content: ${phrase}`);
   }
@@ -230,8 +230,14 @@ for (const route of staticRoutes) {
 
 for (const route of ["/rules", "/en/rules"]) {
   const html = await readRequired(path.join(route.slice(1), "index.html"));
-  const phrase = route.startsWith("/en/") ? "What Is Boccia?" : "什麼是硬地滾球（Boccia）？";
+  const phrase = route.startsWith("/en/") ? "Learn More About Boccia" : "延伸認識硬地滾球";
   if (!html.includes(phrase)) fail(route, "is missing the related Boccia article extension");
+}
+
+for (const route of staticRoutes) {
+  const html = await readRequired(route === "/" ? "index.html" : path.join(route.slice(1), "index.html"));
+  const expectedContactPath = route.startsWith("/en") ? "/en/contact/" : "/contact/";
+  if (!html.includes(`href=\"${expectedContactPath}\"`)) fail(route, "footer is missing the localised Contact link");
 }
 
 if (issues.length) {

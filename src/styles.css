@@ -914,6 +914,12 @@ p {
   margin-bottom: 26px;
 }
 
+.rules-article-section .section-kicker,
+.knowledge-article-header .eyebrow {
+  font-size: 30px;
+  line-height: 1.2;
+}
+
 .rules-article-section img {
   width: 100%;
   aspect-ratio: 1;
@@ -959,14 +965,6 @@ p {
   margin-bottom: 18px;
   font-size: clamp(2.4rem, 6vw, 5.8rem);
   line-height: 1.02;
-}
-
-.knowledge-article-intro {
-  max-width: 760px;
-  margin-bottom: 20px;
-  color: var(--muted);
-  font-size: clamp(1.2rem, 2vw, 1.55rem);
-  font-weight: 750;
 }
 
 .knowledge-article-meta {
@@ -1044,42 +1042,6 @@ p {
   aspect-ratio: 1;
   object-fit: contain;
   background: var(--paper);
-}
-
-.knowledge-article-aside .program-label {
-  margin-top: 20px;
-}
-
-.knowledge-article-aside p:last-child {
-  margin-bottom: 0;
-  color: var(--muted);
-}
-
-.knowledge-cta {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 28px;
-  margin: clamp(20px, 5vw, 72px);
-  color: var(--paper);
-  background: var(--ink);
-}
-
-.knowledge-cta h2,
-.knowledge-cta .section-kicker {
-  color: var(--paper);
-}
-
-.knowledge-cta h2 {
-  margin-bottom: 0;
-  font-size: clamp(1.8rem, 3.5vw, 3.4rem);
-}
-
-.knowledge-related-links {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  gap: 10px;
 }
 
 .image-page-hero {
@@ -1617,23 +1579,13 @@ p {
     justify-content: stretch;
   }
 
-  .knowledge-article-layout,
-  .knowledge-cta {
+  .knowledge-article-layout {
     grid-template-columns: 1fr;
   }
 
   .knowledge-article-aside {
     position: static;
     order: -1;
-  }
-
-  .knowledge-cta {
-    display: grid;
-    margin-inline: 16px;
-  }
-
-  .knowledge-related-links {
-    justify-content: flex-start;
   }
 
   .footer-nav a,
