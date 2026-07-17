@@ -14,6 +14,22 @@ export default function Home() {
     <>
       <Hero />
 
+      <section className="section home-game-section">
+        <div className="home-game-copy">
+          <p className="section-kicker">{content.gamePage.kicker}</p>
+          <h2>{content.gamePage.homeTitle}</h2>
+          <p>{content.gamePage.homeCopy}</p>
+          <Link className="btn primary" to={link("/game")}>
+            {content.gamePage.homeAction}
+          </Link>
+        </div>
+        <div className="home-game-mark" aria-hidden="true">
+          <span className="game-ball red"></span>
+          <span className="game-ball jack"></span>
+          <span className="game-ball blue"></span>
+        </div>
+      </section>
+
       <section className="section offer-section">
         <SectionHeading
           kicker={home.offerKicker}

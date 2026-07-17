@@ -124,7 +124,10 @@ async function validateRoute(route) {
   if ((html.match(/<h1\b/g) || []).length !== 1) fail(scope, "expected exactly one H1");
   if (html.includes('<div id="root"></div>')) fail(scope, "contains an empty root element");
   if (html.includes('noindex')) fail(scope, "official route must not contain noindex");
-  if (html.includes("github.io")) fail(scope, "must not contain github.io");
+  const approvedGameEmbed = 'src="https://queenahmk-art.github.io/bocciagame/"';
+  if (html.includes("github.io") && !html.includes(approvedGameEmbed)) {
+    fail(scope, "contains an unapproved github.io URL");
+  }
   if (decodeHtml(main).length < 160) fail(scope, "initial HTML does not contain enough main content");
 
   assertIncludes(scope, decodedHtml, `<meta property="og:title" content="${seo.title}"`, "Open Graph title");
@@ -164,7 +167,7 @@ async function validateStaticFiles() {
 
   const rootEntries = await readdir(dist, { withFileTypes: true });
   const routeDirectories = rootEntries.filter((entry) => entry.isDirectory() && entry.name !== "assets" && entry.name !== ".vite").map((entry) => entry.name);
-  const expectedDirectories = ["about", "rules", "services", "partnership", "coaches-referees", "contact", "en"];
+  const expectedDirectories = ["about", "rules", "services", "game", "partnership", "coaches-referees", "contact", "en"];
   for (const directory of routeDirectories) {
     if (!expectedDirectories.includes(directory)) fail("dist", `unexpected route directory: ${directory}`);
   }
