@@ -8,6 +8,7 @@ import Services from "./pages/Services.jsx";
 import Partnership from "./pages/Partnership.jsx";
 import CoachesReferees from "./pages/CoachesReferees.jsx";
 import Contact from "./pages/Contact.jsx";
+import Game from "./pages/Game.jsx";
 import KnowledgeArticle from "./pages/KnowledgeArticle.jsx";
 import NotFound from "./pages/NotFound.jsx";
 import SEO from "./components/SEO.jsx";
@@ -26,6 +27,7 @@ export default function App() {
           <Route path="/partnership" element={<Partnership />} />
           <Route path="/coaches-referees" element={<CoachesReferees />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/game" element={<Game />} />
           <Route path="/rules/what-is-boccia" element={<KnowledgeArticle />} />
           <Route path="/en" element={<Home />} />
           <Route path="/en/about" element={<About />} />
@@ -34,6 +36,7 @@ export default function App() {
           <Route path="/en/partnership" element={<Partnership />} />
           <Route path="/en/coaches-referees" element={<CoachesReferees />} />
           <Route path="/en/contact" element={<Contact />} />
+          <Route path="/en/game" element={<Game />} />
           <Route path="/en/rules/what-is-boccia" element={<KnowledgeArticle />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

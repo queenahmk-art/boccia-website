@@ -18,6 +18,10 @@ const zh = {
     title: "硬地滾球活動及服務｜學校、企業及社福機構",
     description: "提供學校硬地滾球活動、企業 Team Building、社區推廣、傷健共融工作坊、教練裁判培訓及球具租借購買服務。",
   },
+  "/game": {
+    title: "硬地滾球線上遊戲｜策略、方向及力度挑戰",
+    description: "免費試玩硬地滾球策略挑戰，以手機、平板或電腦控制投球方向及力度，認識白色目標球 Jack、紅藍雙方及基本場上策略。",
+  },
   "/partnership": {
     title: "硬地滾球合作計劃｜學校、企業及社福機構",
     description: "中國香港硬地滾球總會積極與學校、教育機構、企業、社福機構及社區團體合作，策劃體驗活動、工作坊及比賽。",
@@ -52,6 +56,10 @@ const en = {
   "/en/services": {
     title: "Boccia Activities and Services｜Schools, Corporate and Community",
     description: "Boccia programmes for schools, corporate team building, community outreach, inclusive workshops, coach and referee training, and equipment support.",
+  },
+  "/en/game": {
+    title: "Online Boccia Game｜Strategy, Direction and Power Challenge",
+    description: "Play the free Boccia Strategy Challenge on phone, tablet, or computer. Control direction and power while learning about the jack, red and blue sides, and court strategy.",
   },
   "/en/partnership": {
     title: "Boccia Partnership Programmes｜Schools, Corporate and Community",
