@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "vite --host 127.0.0.1",
     "build": "vite build && node scripts/prerender.mjs",
+    "security:audit": "node scripts/workflow-security-audit.mjs",
+    "test:security": "node --test scripts/workflow-security-audit.test.mjs",
     "seo:audit": "node scripts/seo-audit.mjs",
     "preview": "vite preview --host 127.0.0.1"
   },
