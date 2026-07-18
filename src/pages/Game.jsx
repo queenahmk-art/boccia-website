@@ -3,8 +3,9 @@ import { useSiteContent } from "../hooks/useSiteContent.js";
 const GAME_URL = "https://queenahmk-art.github.io/bocciagame/";
 
 export default function Game() {
-  const { content } = useSiteContent();
+  const { content, lang } = useSiteContent();
   const { gamePage } = content;
+  const gameUrl = lang === "en" ? `${GAME_URL}?lang=en` : GAME_URL;
 
   return (
     <>
@@ -14,7 +15,7 @@ export default function Game() {
         <p>{gamePage.intro}</p>
         <p>{gamePage.guide}</p>
         <p>{gamePage.accessibility}</p>
-        <a className="btn secondary" href={GAME_URL} target="_blank" rel="noreferrer">
+        <a className="btn secondary" href={gameUrl} target="_blank" rel="noreferrer">
           {gamePage.openAction}
         </a>
       </section>
@@ -22,7 +23,7 @@ export default function Game() {
       <section className="game-frame-section" aria-label={gamePage.frameLabel}>
         <div className="game-frame-shell">
           <iframe
-            src={GAME_URL}
+            src={gameUrl}
             title={gamePage.frameTitle}
             allow="fullscreen"
             loading="eager"
@@ -30,7 +31,7 @@ export default function Game() {
         </div>
         <p className="game-frame-help">
           {gamePage.fallback}{" "}
-          <a href={GAME_URL} target="_blank" rel="noreferrer">
+          <a href={gameUrl} target="_blank" rel="noreferrer">
             {gamePage.fallbackAction}
           </a>
         </p>

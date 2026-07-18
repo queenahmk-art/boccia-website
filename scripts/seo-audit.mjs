@@ -124,8 +124,12 @@ async function validateRoute(route) {
   if ((html.match(/<h1\b/g) || []).length !== 1) fail(scope, "expected exactly one H1");
   if (html.includes('<div id="root"></div>')) fail(scope, "contains an empty root element");
   if (html.includes('noindex')) fail(scope, "official route must not contain noindex");
-  const approvedGameEmbed = 'src="https://queenahmk-art.github.io/bocciagame/"';
-  if (html.includes("github.io") && !html.includes(approvedGameEmbed)) {
+  const approvedGameUrls = new Set([
+    "https://queenahmk-art.github.io/bocciagame/",
+    "https://queenahmk-art.github.io/bocciagame/?lang=en",
+  ]);
+  const githubUrls = html.match(/https:\/\/[^"'\s<]*\.github\.io\/[^"'\s<]*/g) ?? [];
+  if (githubUrls.some((url) => !approvedGameUrls.has(url))) {
     fail(scope, "contains an unapproved github.io URL");
   }
   if (decodeHtml(main).length < 160) fail(scope, "initial HTML does not contain enough main content");

@@ -684,6 +684,7 @@ p {
 .knowledge-text-link {
   display: inline-flex;
   margin-top: 14px;
+  margin-inline-start: 5ch;
   color: var(--red);
   font-weight: 950;
   text-decoration: underline;
@@ -1578,6 +1579,10 @@ p {
     padding-inline: 0;
   }
 
+  .game-page-intro {
+    padding: 2px 30px;
+  }
+
   .game-frame-shell {
     min-height: 720px;
     border-inline: 0;
@@ -1754,5 +1759,10 @@ p {
 
   .hero {
     min-height: 820px;
+  }
+
+  .knowledge-text-link {
+    display: flex;
+    margin-inline-start: 0;
   }
 }
