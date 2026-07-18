@@ -512,14 +512,18 @@ p {
   color: var(--paper);
 }
 
+.game-page-intro .section-kicker {
+  font-size: 1.875rem;
+}
+
 .game-page-intro h1 {
   max-width: 1000px;
-  font-size: var(--page-hero-title-size);
+  font-size: 1.75rem;
 }
 
 .game-page-intro p:not(.section-kicker) {
   max-width: 780px;
-  font-size: var(--page-hero-copy-size);
+  font-size: 0.9375rem;
 }
 
 .game-frame-section {
