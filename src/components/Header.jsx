@@ -9,10 +9,11 @@ export default function Header() {
   const { content, link, switchPath } = useSiteContent();
 
   const closeNav = () => setIsOpen(false);
+  const returnToTop = () => window.scrollTo({ top: 0, left: 0, behavior: "instant" });
 
   return (
     <header className="site-header">
-      <Link className="brand" to={link("/")} onClick={closeNav} aria-label={content.brand.homeAria}>
+      <Link className="brand" to={link("/")} onClick={() => { closeNav(); returnToTop(); }} aria-label={content.brand.homeAria}>
         <img src={assets.logo} alt={content.brand.logoAlt} width={assetMeta.logo.width} height={assetMeta.logo.height} />
         <span>
           <strong>{content.brand.name}</strong>
@@ -41,12 +42,12 @@ export default function Header() {
             .join(" ");
 
           return (
-            <NavLink key={item.path} to={itemPath} end={item.path === "/"} className={classes || undefined} onClick={closeNav}>
+            <NavLink key={item.path} to={itemPath} end={item.path === "/"} className={classes || undefined} onClick={() => { closeNav(); returnToTop(); }}>
               {item.label}
             </NavLink>
           );
         })}
-        <Link className="language-link" to={switchPath} onClick={closeNav}>
+        <Link className="language-link" to={switchPath} onClick={() => { closeNav(); returnToTop(); }}>
           {content.otherLangLabel}
         </Link>
       </nav>

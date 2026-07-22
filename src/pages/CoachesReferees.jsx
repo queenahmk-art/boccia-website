@@ -9,7 +9,7 @@ export default function CoachesReferees() {
 
   return (
     <>
-      <section className="page-hero image-page-hero">
+      <section className="page-hero image-page-hero coaches-page-hero">
         <img
           src={assets.coachTraining}
           alt={page.imageAlt}
@@ -18,7 +18,7 @@ export default function CoachesReferees() {
           fetchpriority="high"
         />
         <div>
-          <p className="eyebrow light">{page.kicker}</p>
+          {page.kicker ? <p className="eyebrow light">{page.kicker}</p> : null}
           {page.title ? <h1>{page.title}</h1> : <h1 className="sr-only">{page.pageH1}</h1>}
           <p>{page.intro}</p>
         </div>
@@ -43,13 +43,13 @@ export default function CoachesReferees() {
         </div>
       </section>
 
-      <section className="cta-section">
+      <section className="cta-section coaches-cta">
         <div>
-          <p className="section-kicker">{page.ctaKicker}</p>
+          {page.ctaKicker ? <p className="section-kicker">{page.ctaKicker}</p> : null}
           <h2>{page.ctaTitle}</h2>
-          <p>{page.ctaCopy}</p>
+          {page.ctaCopy ? <p>{page.ctaCopy}</p> : null}
         </div>
-        <Link className="btn primary light" to={link("/contact")}>
+        <Link className="btn primary light coaches-cta-action" to={link("/contact")}>
           {page.ctaAction}
         </Link>
       </section>

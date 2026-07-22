@@ -67,9 +67,12 @@ function validateJsonLd(scope, html, seo) {
     const data = JSON.parse(scripts[0][1]);
     const graph = data["@graph"];
     const isArticle = seo.path.endsWith("/what-is-boccia");
+    const isEquipment = seo.path === "/equipment" || seo.path === "/en/equipment";
     const expectedTypes = isArticle
       ? ["Article", "WebPage", "BreadcrumbList"]
-      : ["Organization", "SportsOrganization", "WebSite", "WebPage"];
+      : isEquipment
+        ? ["WebPage", "BreadcrumbList"]
+        : ["Organization", "SportsOrganization", "WebSite", "WebPage"];
     const types = Array.isArray(graph) ? graph.map((item) => item["@type"]) : [];
 
     for (const type of expectedTypes) {
@@ -97,6 +100,14 @@ function validateJsonLd(scope, html, seo) {
       }
       const breadcrumb = graph.find((item) => item["@type"] === "BreadcrumbList");
       if (!breadcrumb?.itemListElement?.length) fail(scope, "Article JSON-LD is missing breadcrumb items");
+    }
+
+    if (isEquipment) {
+      const breadcrumb = graph.find((item) => item["@type"] === "BreadcrumbList");
+      if (!breadcrumb?.itemListElement?.length) fail(scope, "Equipment JSON-LD is missing breadcrumb items");
+      if (types.some((value) => ["Product", "Offer", "AggregateRating", "Review"].includes(value))) {
+        fail(scope, "Equipment JSON-LD must not include product or rating schema");
+      }
     }
   } catch (error) {
     fail(scope, `invalid JSON-LD: ${error.message}`);
@@ -132,7 +143,8 @@ async function validateRoute(route) {
   if (githubUrls.some((url) => !approvedGameUrls.has(url))) {
     fail(scope, "contains an unapproved github.io URL");
   }
-  if (decodeHtml(main).length < 160) fail(scope, "initial HTML does not contain enough main content");
+  const minimumMainContentLength = seo.path === "/equipment" || seo.path === "/en/equipment" ? 100 : 160;
+  if (decodeHtml(main).length < minimumMainContentLength) fail(scope, "initial HTML does not contain enough main content");
 
   assertIncludes(scope, decodedHtml, `<meta property="og:title" content="${seo.title}"`, "Open Graph title");
   assertIncludes(scope, decodedHtml, `<meta property="og:description" content="${seo.description}"`, "Open Graph description");
@@ -171,7 +183,7 @@ async function validateStaticFiles() {
 
   const rootEntries = await readdir(dist, { withFileTypes: true });
   const routeDirectories = rootEntries.filter((entry) => entry.isDirectory() && entry.name !== "assets" && entry.name !== ".vite").map((entry) => entry.name);
-  const expectedDirectories = ["about", "rules", "services", "game", "partnership", "coaches-referees", "contact", "en"];
+  const expectedDirectories = ["about", "rules", "services", "equipment", "game", "partnership", "coaches-referees", "contact", "en"];
   for (const directory of routeDirectories) {
     if (!expectedDirectories.includes(directory)) fail("dist", `unexpected route directory: ${directory}`);
   }
@@ -239,6 +251,16 @@ for (const route of ["/rules", "/en/rules"]) {
   const html = await readRequired(path.join(route.slice(1), "index.html"));
   const phrase = route.startsWith("/en/") ? "Learn More About Boccia" : "延伸認識硬地滾球";
   if (!html.includes(phrase)) fail(route, "is missing the related Boccia article extension");
+}
+
+for (const route of ["/equipment", "/en/equipment"]) {
+  const html = await readRequired(path.join(route.slice(1), "index.html"));
+  const requiredPhrases = route.startsWith("/en/")
+    ? ["Boccia Balls", "Victory Sports", "Handilife Sports", "Looking to Purchase Boccia Balls?"]
+    : ["硬地滾球球具", "Victory Sports", "Handilife Sports", "想購買硬地滾球球具？"];
+  for (const phrase of requiredPhrases) {
+    if (!html.includes(phrase)) fail(route, `initial HTML is missing equipment content: ${phrase}`);
+  }
 }
 
 for (const route of staticRoutes) {

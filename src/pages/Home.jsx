@@ -49,12 +49,12 @@ export default function Home() {
       </section>
 
       <section className="section split-feature">
-        <div className="split-media equipment-media">
+        <div className="split-media home-mission-media">
           <img
-            src={assets.bocciaImage}
-            alt={home.equipmentAlt}
-            width={assetMeta.bocciaImage.width}
-            height={assetMeta.bocciaImage.height}
+            src={assets.schoolBocciaExperience}
+            alt={home.missionImageAlt}
+            width={assetMeta.schoolBocciaExperience.width}
+            height={assetMeta.schoolBocciaExperience.height}
             loading="lazy"
             decoding="async"
           />

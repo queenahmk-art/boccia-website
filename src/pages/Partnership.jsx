@@ -27,6 +27,9 @@ export default function Partnership() {
 
       <section className="section partnership-section">
         <SectionHeading kicker={page.sectionKicker} title={page.sectionTitle} copy={page.sectionCopy} />
+        <Link className="partnership-services-link" to={link("/services")}>
+          {page.servicesAction}
+        </Link>
         <div className="partnership-grid">
           {content.partnershipGroups.map((group) => (
             <article key={group.title} className="partnership-card">

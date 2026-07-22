@@ -20,7 +20,7 @@ export default function Hero() {
       <div className="hero-copy">
         <p className="eyebrow light">{hero.kicker}</p>
         <h1 className="hero-title-top">{hero.titleTop}</h1>
-        <p className="hero-title-sub">{hero.titleSub}</p>
+        {hero.titleSub ? <p className="hero-title-sub">{hero.titleSub}</p> : null}
         <p className="lead">{hero.lead}</p>
         <p>{hero.copy}</p>
         <div className="hero-actions">

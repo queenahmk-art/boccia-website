@@ -5,6 +5,7 @@ import Home from "./pages/Home.jsx";
 import About from "./pages/About.jsx";
 import Rules from "./pages/Rules.jsx";
 import Services from "./pages/Services.jsx";
+import Equipment from "./pages/Equipment.jsx";
 import Partnership from "./pages/Partnership.jsx";
 import CoachesReferees from "./pages/CoachesReferees.jsx";
 import Contact from "./pages/Contact.jsx";
@@ -12,10 +13,12 @@ import Game from "./pages/Game.jsx";
 import KnowledgeArticle from "./pages/KnowledgeArticle.jsx";
 import NotFound from "./pages/NotFound.jsx";
 import SEO from "./components/SEO.jsx";
+import ScrollToTop from "./components/ScrollToTop.jsx";
 
 export default function App() {
   return (
     <div className="app-shell">
+      <ScrollToTop />
       <SEO />
       <Header />
       <main>
@@ -24,6 +27,7 @@ export default function App() {
           <Route path="/about" element={<About />} />
           <Route path="/rules" element={<Rules />} />
           <Route path="/services" element={<Services />} />
+          <Route path="/equipment" element={<Equipment />} />
           <Route path="/partnership" element={<Partnership />} />
           <Route path="/coaches-referees" element={<CoachesReferees />} />
           <Route path="/contact" element={<Contact />} />
@@ -33,6 +37,7 @@ export default function App() {
           <Route path="/en/about" element={<About />} />
           <Route path="/en/rules" element={<Rules />} />
           <Route path="/en/services" element={<Services />} />
+          <Route path="/en/equipment" element={<Equipment />} />
           <Route path="/en/partnership" element={<Partnership />} />
           <Route path="/en/coaches-referees" element={<CoachesReferees />} />
           <Route path="/en/contact" element={<Contact />} />

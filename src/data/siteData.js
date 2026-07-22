@@ -2,6 +2,9 @@ import logo from "../assets/logo.png";
 import promoActivity from "../assets/promo-activity.jpg";
 import coachTraining from "../assets/coach-training.jpg";
 import rulesImage from "../assets/rules.jpg";
+import victorySportsBoccia from "../assets/victory-sports-boccia.png";
+import handilifeSportsBoccia from "../assets/handilife-sports-boccia.png";
+import schoolBocciaExperience from "../assets/school-boccia-experience.png";
 import eventImage from "../../promo.jpg";
 import bocciaImage from "../../Boccia.jpg";
 
@@ -12,6 +15,7 @@ export const assetMeta = {
   rulesImage: { src: rulesImage, width: 1024, height: 1024 },
   eventImage: { src: eventImage, width: 1024, height: 1024 },
   bocciaImage: { src: bocciaImage, width: 400, height: 400 },
+  schoolBocciaExperience: { src: schoolBocciaExperience, width: 1254, height: 1254 },
 };
 
 export const assets = Object.fromEntries(
@@ -25,16 +29,30 @@ export function getImageDimensions(source) {
 export const contact = {
   email: "bocciaassociationhkg@gmail.com",
   phone: "+852 5295 7859",
+  whatsappNumber: "85252957859",
   whatsappUrl: "https://wa.me/85252957859",
 };
+
+export const equipmentProducts = [
+  { category: "boccia-balls", brandName: "Victory Sports", image: victorySportsBoccia, imageAlt: "Victory Sports 硬地滾球" },
+  { category: "boccia-balls", brandName: "Handilife Sports", image: handilifeSportsBoccia, imageAlt: "Handilife Sports 硬地滾球套裝" },
+];
+
+export function createWhatsAppUrl(message) {
+  return `${contact.whatsappUrl}?text=${encodeURIComponent(message)}`;
+}
+
+export function createMailtoUrl(subject, body) {
+  return `mailto:${contact.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
 
 const navPaths = [
   ["home", "/"],
   ["about", "/about"],
   ["rules", "/rules"],
   ["services", "/services"],
+  ["equipment", "/equipment"],
   ["game", "/game"],
-  ["partnership", "/partnership"],
   ["coaches", "/coaches-referees"],
   ["contact", "/contact"],
 ];
@@ -60,8 +78,8 @@ export const siteContent = {
           about: "關於本會",
           rules: "認識硬地滾球",
           services: "我們的服務",
+          equipment: "球具",
           game: "線上遊戲",
-          partnership: "推廣合作",
           coaches: "教練及裁判",
           contact: "聯絡我們",
         }[key],
@@ -69,7 +87,7 @@ export const siteContent = {
     hero: {
       kicker: "硬地滾球・香港",
       titleTop: "硬地滾球",
-      titleSub: "推動硬地滾球普及全港",
+      titleSub: "",
       lead: "中國香港硬地滾球總會致力推廣硬地滾球，讓更多市民接觸並參與這項充滿策略、專注及技巧的運動。",
       copy: "透過推廣活動、專業培訓及跨界合作，讓硬地滾球走進校園、企業及社區，建立更完善的發展平台。",
       primaryAction: "探索服務",
@@ -90,7 +108,7 @@ export const siteContent = {
       missionCopy: "本會希望透過推廣活動、專業培訓及跨界合作，建立更完善的發展平台，讓不同年齡及能力人士都能參與硬地滾球。",
       missionAction: "關於本會",
       articleAction: "什麼是硬地滾球？",
-      equipmentAlt: "硬地滾球紅球、藍球及白色目標球",
+      missionImageAlt: "教練與小朋友體驗硬地滾球活動",
       servicesKicker: "服務項目",
       servicesTitle: "本會服務",
       servicesCopy: "以清晰的服務分類支援學校、社福機構、企業及社區團體。",
@@ -115,7 +133,7 @@ export const siteContent = {
     offerings: [
       { title: "推廣活動", label: "服務 01", text: "把硬地滾球帶到學校、企業及社區，讓更多人士親身體驗。" },
       { title: "教練及裁判培訓", label: "服務 02", text: "建立教練及裁判發展制度，提升活動及比賽質素。" },
-      { title: "球具租借及購買", label: "服務 03", text: "提供不同規格球具套裝安排，方便機構舉辦活動。" },
+      { title: "球具租借", label: "服務 03", text: "提供不同規格球具套裝租借安排，方便機構舉辦活動。" },
     ],
     services: [
       {
@@ -138,13 +156,13 @@ export const siteContent = {
       },
       {
         number: "03",
-        title: "球具租借及購買",
+        title: "球具租借",
         label: "服務 03",
         image: bocciaImage,
         photoFrame: true,
-        copy: "本會提供不同規格的硬地滾球套裝租借及購買服務，方便不同機構及團體舉辦活動。",
+        copy: "本會提供不同規格的硬地滾球套裝租借服務，方便不同機構及團體舉辦活動。",
         bullets: ["學校", "社福機構", "企業", "社區團體"],
-        action: "查詢球具",
+        action: "查詢租借",
       },
     ],
     about: {
@@ -219,12 +237,29 @@ export const siteContent = {
     servicesPage: {
       kicker: "服務項目",
       title: "本會服務",
-      intro: "本會以推廣活動、教練及裁判培訓、球具租借及購買三大服務，協助不同機構及團體推動硬地滾球。",
+      intro: "本會以推廣活動、教練及裁判培訓及球具租借三大服務，協助不同機構及團體推動硬地滾球。",
       sectionKicker: "服務內容",
       sectionTitle: "由體驗到持續發展",
       sectionCopy: "服務可按機構需要調整，適合學校、社福機構、企業及社區團體。",
+      promotionKicker: "",
+      promotionTitle: "策劃學校及社區硬地滾球體驗",
+      promotionCopy: "本會可協助安排學校體驗活動、社區推廣活動及傷健共融工作坊，讓不同年齡及能力人士親身接觸硬地滾球。",
+      promotionAction: "查詢推廣活動",
       audienceKicker: "適合對象",
       audienceTitle: "",
+    },
+    equipmentPage: {
+      kicker: "",
+      title: "硬地滾球球具",
+      whatsappAction: "WhatsApp 查詢",
+      emailAction: "電郵查詢",
+      ballsKicker: "硬地滾球",
+      brandsLabel: "出售品牌",
+      finalTitle: "想購買硬地滾球球具？",
+      finalCopy: "歡迎透過 WhatsApp 或電郵提供品牌選擇及所需數量，本會會跟進購買安排。",
+      whatsappMessage: "你好，我想查詢購買硬地滾球球具。品牌選擇及所需數量是：",
+      emailSubject: "硬地滾球球具購買查詢",
+      emailBody: "你好，我想查詢購買硬地滾球球具。\n\n品牌選擇：\n所需數量：\n使用需要：\n其他要求：",
     },
     partnership: {
       kicker: "合作機會",
@@ -235,11 +270,12 @@ export const siteContent = {
       sectionKicker: "合作類型",
       sectionTitle: "我們的服務類型",
       sectionCopy: "不同合作對象可按活動目標、參與人數和場地條件規劃合適形式。",
+      servicesAction: "查看本會服務",
       inclusionKicker: "",
       inclusionTitle: "",
       ctaKicker: "",
-      ctaTitle: "需要策劃校園、企業或社區體驗？",
-      ctaCopy: "提供活動目標、日期、參加人數及場地資料，本會可協助規劃合適形式。",
+      ctaTitle: "歡迎提供活動對象、日期、參加人數及場地資料，本會可協助規劃合適形式。",
+      ctaCopy: "",
       ctaAction: "查詢合作",
     },
     partnershipGroups: [
@@ -270,20 +306,20 @@ export const siteContent = {
       imageAlt: "硬地滾球教練及裁判培訓",
       standardKicker: "專業標準",
       standardTitle: "",
-      standardCopy: "本會希望確保活動及比賽具備公平性及專業水平，透過培訓、持續專業發展及認可名冊，共同推動香港硬地滾球持續發展。",
+      standardCopy: "本會目標確保活動及比賽具備公平性及專業水平，透過培訓、持續專業發展及認可名冊，共同推動香港硬地滾球持續發展。",
       pathwayKicker: "發展路徑",
       pathwayTitle: "",
       pathwayCopy: "培訓及認可制度將逐步推出，讓有志推動硬地滾球的人士建立清晰發展路徑。",
-      ctaKicker: "培訓查詢",
+      ctaKicker: "",
       ctaTitle: "有興趣成為教練或裁判？",
-      ctaCopy: "歡迎留下聯絡資料，本會將按培訓安排提供後續資訊。",
+      ctaCopy: "",
       ctaAction: "聯絡我們",
     },
-    coachPathway: ["教練培訓班", "裁判培訓班", "持續專業發展課程", "認可教練名冊", "認可裁判名冊"],
+    coachPathway: ["教練培訓班", "裁判培訓班", "認可教練名冊", "認可裁判名冊"],
     contactPage: {
       kicker: "聯絡方式",
       title: "聯絡我們",
-      intro: "如欲查詢推廣活動、教練及裁判培訓、球具租借及購買，或推廣合作安排，歡迎透過以下方式聯絡本會。",
+      intro: "如欲查詢推廣活動、教練及裁判培訓、球具租借、硬地滾球球具購買或推廣合作安排，歡迎透過以下方式聯絡本會。",
       panelKicker: "聯絡方式",
       panelTitle: "直接聯絡本會",
       panelCopy: "查詢活動、培訓、球具或合作安排，請透過電郵或 WhatsApp 聯絡。",
@@ -317,8 +353,8 @@ export const siteContent = {
           about: "About",
           rules: "Boccia",
           services: "Services",
+          equipment: "Equipment",
           game: "Online Game",
-          partnership: "Partnership",
           coaches: "Coaches & Referees",
           contact: "Contact",
         }[key],
@@ -326,7 +362,7 @@ export const siteContent = {
     hero: {
       kicker: "Boccia for Hong Kong",
       titleTop: "Boccia",
-      titleSub: "Promoting boccia across Hong Kong",
+      titleSub: "",
       lead: "The Association promotes boccia so more people can experience a sport built on strategy, focus, precision, and inclusive participation.",
       copy: "Through outreach programmes, professional training, and cross-sector partnerships, we bring boccia into schools, companies, and communities.",
       primaryAction: "Explore Services",
@@ -347,7 +383,7 @@ export const siteContent = {
       missionCopy: "We build accessible participation pathways through outreach, training, and collaboration, so people of different ages and abilities can take part.",
       missionAction: "About Us",
       articleAction: "What Is Boccia?",
-      equipmentAlt: "Red, blue, and white boccia balls",
+      missionImageAlt: "Coach and child enjoying a boccia activity",
       servicesKicker: "Programmes",
       servicesTitle: "Our Services",
       servicesCopy: "Clear service options for schools, social service groups, companies, and community organisations.",
@@ -372,7 +408,7 @@ export const siteContent = {
     offerings: [
       { title: "Outreach Programmes", label: "Community Programmes", text: "Bring boccia to schools, companies, and communities through hands-on experience sessions." },
       { title: "Coach & Referee Training", label: "Professional Pathway", text: "Develop coaches and referees to support quality activities and fair competition." },
-      { title: "Equipment Rental & Purchase", label: "Equipment Support", text: "Provide boccia sets and equipment arrangements for organisations and groups." },
+      { title: "Equipment Rental", label: "Equipment Support", text: "Provide boccia set rental arrangements for organisations and groups." },
     ],
     services: [
       {
@@ -395,13 +431,13 @@ export const siteContent = {
       },
       {
         number: "03",
-        title: "Equipment Rental & Purchase",
+        title: "Equipment Rental",
         label: "Equipment Support",
         image: bocciaImage,
         photoFrame: true,
-        copy: "We provide boccia equipment rental and purchase support for organisations and groups running activities.",
+        copy: "We provide boccia equipment rental support for organisations and groups running activities.",
         bullets: ["Schools", "Social service organisations", "Companies", "Community groups"],
-        action: "Enquire about equipment",
+        action: "Enquire about rental",
       },
     ],
     about: {
@@ -476,12 +512,29 @@ export const siteContent = {
     servicesPage: {
       kicker: "Our Services",
       title: "Our Services",
-      intro: "We support boccia development through outreach programmes, coach and referee training, and equipment rental or purchase.",
+      intro: "We support boccia development through outreach programmes, coach and referee training, and equipment rental.",
       sectionKicker: "Programmes",
       sectionTitle: "From experience to sustainable development",
       sectionCopy: "Services can be adjusted for schools, social service organisations, companies, and community groups.",
+      promotionKicker: "",
+      promotionTitle: "Plan a Boccia Experience for Schools and Communities",
+      promotionCopy: "We can help arrange school experience sessions, community outreach activities, and inclusive workshops so people of different ages and abilities can experience boccia first-hand.",
+      promotionAction: "Enquire About Outreach Activities",
       audienceKicker: "Suitable For",
       audienceTitle: "",
+    },
+    equipmentPage: {
+      kicker: "",
+      title: "Boccia Balls",
+      whatsappAction: "Enquire by WhatsApp",
+      emailAction: "Enquire by Email",
+      ballsKicker: "Boccia Balls",
+      brandsLabel: "Brands Available",
+      finalTitle: "Looking to Purchase Boccia Balls?",
+      finalCopy: "Share your preferred brand and required quantity by WhatsApp or email, and the Association will follow up on the purchase arrangement.",
+      whatsappMessage: "Hello, I would like to enquire about purchasing boccia balls. My preferred brand and required quantity are:",
+      emailSubject: "Boccia Balls Purchase Enquiry",
+      emailBody: "Hello, I would like to enquire about purchasing boccia balls.\n\nPreferred brand:\nRequired quantity:\nIntended use:\nOther requirements:",
     },
     partnership: {
       kicker: "Partnership",
@@ -492,11 +545,12 @@ export const siteContent = {
       sectionKicker: "Service Types",
       sectionTitle: "Partnership Formats",
       sectionCopy: "Activities can be planned according to goals, group size, and venue conditions.",
+      servicesAction: "View Our Services",
       inclusionKicker: "",
       inclusionTitle: "",
       ctaKicker: "",
-      ctaTitle: "Planning a school, corporate, or community activity?",
-      ctaCopy: "Share your objectives, date, participant number, and venue details so we can suggest a suitable format.",
+      ctaTitle: "Share the participant group, date, number of participants, and venue details, and we can help plan a suitable format.",
+      ctaCopy: "",
       ctaAction: "Contact Us",
     },
     partnershipGroups: [
@@ -527,20 +581,20 @@ export const siteContent = {
       imageAlt: "Boccia coach and referee training",
       standardKicker: "Professional Standard",
       standardTitle: "",
-      standardCopy: "We aim to support fair and professional activities and competitions through training, continuing development, and recognised coach and referee lists.",
+      standardCopy: "The Association aims to ensure fair and professional activities and competitions through training, continuing professional development, and recognised coach and referee lists.",
       pathwayKicker: "Coming Pathway",
       pathwayTitle: "",
       pathwayCopy: "Training and recognition pathways will be introduced progressively for people who want to support boccia development.",
-      ctaKicker: "Training enquiries",
+      ctaKicker: "",
       ctaTitle: "Interested in becoming a coach or referee?",
-      ctaCopy: "Contact us for future training information and updates.",
+      ctaCopy: "",
       ctaAction: "Contact Us",
     },
-    coachPathway: ["Coach training courses", "Referee training courses", "Continuing professional development", "Recognised coach list", "Recognised referee list"],
+    coachPathway: ["Coach training courses", "Referee training courses", "Recognised coach list", "Recognised referee list"],
     contactPage: {
       kicker: "Contact",
       title: "Contact Us",
-      intro: "For enquiries about outreach programmes, coach and referee training, equipment rental or purchase, or partnership arrangements, please contact us below.",
+      intro: "For enquiries about outreach programmes, coach and referee training, equipment rental, boccia ball purchases, or partnership arrangements, please contact us below.",
       panelKicker: "Get in touch",
       panelTitle: "Contact the Association",
       panelCopy: "For activity, training, equipment, or partnership enquiries, contact us by email or WhatsApp.",

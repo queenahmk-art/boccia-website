@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import FeatureStrip from "../components/FeatureStrip.jsx";
 import ProgramCard from "../components/ProgramCard.jsx";
 import SectionHeading from "../components/SectionHeading.jsx";
@@ -22,6 +23,17 @@ export default function Services() {
             <ProgramCard key={service.title} item={service} to={link("/contact")} />
           ))}
         </div>
+      </section>
+
+      <section className="section equipment-service-entrance">
+        <div>
+          {page.promotionKicker ? <p className="section-kicker">{page.promotionKicker}</p> : null}
+          <h2>{page.promotionTitle}</h2>
+          <p>{page.promotionCopy}</p>
+        </div>
+        <Link className="btn secondary" to={link("/contact")}>
+          {page.promotionAction}
+        </Link>
       </section>
 
       <FeatureStrip kicker={page.audienceKicker} title={page.audienceTitle} items={content.audiences} />

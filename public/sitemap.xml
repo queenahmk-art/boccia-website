@@ -13,6 +13,9 @@
     <loc>https://hkboccia.com.hk/services/</loc>
   </url>
   <url>
+    <loc>https://hkboccia.com.hk/equipment/</loc>
+  </url>
+  <url>
     <loc>https://hkboccia.com.hk/game/</loc>
   </url>
   <url>
@@ -38,6 +41,9 @@
   </url>
   <url>
     <loc>https://hkboccia.com.hk/en/services/</loc>
+  </url>
+  <url>
+    <loc>https://hkboccia.com.hk/en/equipment/</loc>
   </url>
   <url>
     <loc>https://hkboccia.com.hk/en/game/</loc>

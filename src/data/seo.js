@@ -16,7 +16,11 @@ const zh = {
   },
   "/services": {
     title: "硬地滾球活動及服務｜學校、企業及社福機構",
-    description: "提供學校硬地滾球活動、企業 Team Building、社區推廣、傷健共融工作坊、教練裁判培訓及球具租借購買服務。",
+    description: "提供學校硬地滾球活動、企業 Team Building、社區推廣、傷健共融工作坊、教練裁判培訓及球具租借服務。",
+  },
+  "/equipment": {
+    title: "硬地滾球球具｜不同品牌購買查詢",
+    description: "中國香港硬地滾球總會出售 Victory Sports、Handilife Sports 等不同品牌硬地滾球球具，適合個人、學校、機構、教練、活動及比賽使用，歡迎透過 WhatsApp 或電郵查詢。",
   },
   "/game": {
     title: "硬地滾球線上遊戲｜策略、方向及力度挑戰",
@@ -55,7 +59,11 @@ const en = {
   },
   "/en/services": {
     title: "Boccia Activities and Services｜Schools, Corporate and Community",
-    description: "Boccia programmes for schools, corporate team building, community outreach, inclusive workshops, coach and referee training, and equipment support.",
+    description: "Boccia programmes for schools, corporate team building, community outreach, inclusive workshops, coach and referee training, and equipment rental.",
+  },
+  "/en/equipment": {
+    title: "Boccia Balls｜Purchase Enquiries in Hong Kong",
+    description: "Purchase enquiries for Victory Sports, Handilife Sports, and other boccia balls for individuals, schools, organisations, coaches, activities and competitions. Contact us by WhatsApp or email.",
   },
   "/en/game": {
     title: "Online Boccia Game｜Strategy, Direction and Power Challenge",
@@ -262,6 +270,33 @@ export function getStructuredData(pathname) {
           url: seo.canonical,
         },
         webpage,
+        getBreadcrumbStructuredData(seo, labels),
+      ],
+    };
+  }
+
+  if (seo.path === "/equipment" || seo.path === "/en/equipment") {
+    const labels = seo.language === "en"
+      ? [
+          { name: "Home", path: "/en" },
+          { name: "Equipment", path: "/en/equipment" },
+        ]
+      : [
+          { name: "首頁", path: "/" },
+          { name: "球具及用品", path: "/equipment" },
+        ];
+    return {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebPage",
+          "@id": `${seo.canonical}#webpage`,
+          url: seo.canonical,
+          name: seo.title,
+          description: seo.description,
+          inLanguage: seo.lang,
+          isPartOf: { "@id": `${SITE_URL}/#website` },
+        },
         getBreadcrumbStructuredData(seo, labels),
       ],
     };

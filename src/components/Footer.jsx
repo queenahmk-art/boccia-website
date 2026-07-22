@@ -4,6 +4,7 @@ import { useSiteContent } from "../hooks/useSiteContent.js";
 
 export default function Footer() {
   const { content, link } = useSiteContent();
+  const returnToTop = () => window.scrollTo({ top: 0, left: 0, behavior: "instant" });
 
   return (
     <footer className="site-footer">
@@ -14,7 +15,7 @@ export default function Footer() {
       </div>
       <nav className="footer-nav" aria-label="頁尾導覽">
         {content.navItems.map((item) => (
-          <Link key={item.path} to={link(item.path)}>
+          <Link key={item.path} to={link(item.path)} onClick={returnToTop}>
             {item.label}
           </Link>
         ))}
