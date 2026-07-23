@@ -19,8 +19,8 @@ const zh = {
     description: "提供學校硬地滾球活動、企業 Team Building、社區推廣、傷健共融工作坊、教練裁判培訓及球具租借服務。",
   },
   "/equipment": {
-    title: "硬地滾球球具｜不同品牌購買查詢",
-    description: "中國香港硬地滾球總會出售 Victory Sports、Handilife Sports 等不同品牌硬地滾球球具，適合個人、學校、機構、教練、活動及比賽使用，歡迎透過 WhatsApp 或電郵查詢。",
+    title: "硬地滾球套裝｜不同品牌購買查詢",
+    description: "中國香港硬地滾球總會出售 Victory Sports、Handilife Sports 等不同品牌硬地滾球套裝，適合個人、學校、機構、教練、活動及比賽使用，歡迎透過 WhatsApp 或電郵查詢。",
   },
   "/game": {
     title: "硬地滾球線上遊戲｜策略、方向及力度挑戰",
@@ -62,8 +62,8 @@ const en = {
     description: "Boccia programmes for schools, corporate team building, community outreach, inclusive workshops, coach and referee training, and equipment rental.",
   },
   "/en/equipment": {
-    title: "Boccia Balls｜Purchase Enquiries in Hong Kong",
-    description: "Purchase enquiries for Victory Sports, Handilife Sports, and other boccia balls for individuals, schools, organisations, coaches, activities and competitions. Contact us by WhatsApp or email.",
+    title: "Boccia Sets｜Purchase Enquiries in Hong Kong",
+    description: "Purchase enquiries for Victory Sports, Handilife Sports, and other boccia sets for individuals, schools, organisations, coaches, activities and competitions. Contact us by WhatsApp or email.",
   },
   "/en/game": {
     title: "Online Boccia Game｜Strategy, Direction and Power Challenge",

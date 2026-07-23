@@ -256,8 +256,8 @@ for (const route of ["/rules", "/en/rules"]) {
 for (const route of ["/equipment", "/en/equipment"]) {
   const html = await readRequired(path.join(route.slice(1), "index.html"));
   const requiredPhrases = route.startsWith("/en/")
-    ? ["Boccia Balls", "Victory Sports", "Handilife Sports", "Looking to Purchase Boccia Balls?"]
-    : ["硬地滾球球具", "Victory Sports", "Handilife Sports", "想購買硬地滾球球具？"];
+    ? ["Boccia Sets", "Victory Sports", "Handilife Sports", "Looking to Purchase a Boccia Set?"]
+    : ["硬地滾球套裝", "Victory Sports", "Handilife Sports", "想購買硬地滾球套裝？"];
   for (const phrase of requiredPhrases) {
     if (!html.includes(phrase)) fail(route, `initial HTML is missing equipment content: ${phrase}`);
   }
