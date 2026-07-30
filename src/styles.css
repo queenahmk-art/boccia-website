@@ -1156,7 +1156,7 @@ p {
 .knowledge-article-header h1 {
   max-width: 920px;
   margin-bottom: 18px;
-  font-size: clamp(2.4rem, 6vw, 5.8rem);
+  font-size: clamp(2.4rem, 4.2vw, 50px);
   line-height: 1.02;
 }
 
