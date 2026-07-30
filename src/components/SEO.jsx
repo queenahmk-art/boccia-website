@@ -12,6 +12,10 @@ function upsertMeta(attribute, name, content) {
   element.setAttribute("content", content);
 }
 
+function removeMeta(attribute, name) {
+  document.head.querySelector(`meta[${attribute}="${name}"]`)?.remove();
+}
+
 function upsertLink(rel, href, hreflang) {
   const selector = hreflang ? `link[rel="${rel}"][hreflang="${hreflang}"]` : `link[rel="${rel}"]:not([hreflang])`;
   let element = document.head.querySelector(selector);
@@ -37,7 +41,7 @@ export default function SEO() {
 
     upsertMeta("name", "description", seo.description);
     upsertMeta("name", "robots", seo.noindex ? "noindex, follow" : "index, follow");
-    upsertMeta("property", "og:type", "website");
+    upsertMeta("property", "og:type", seo.ogType || "website");
     upsertMeta("property", "og:title", seo.title);
     upsertMeta("property", "og:description", seo.description);
     upsertMeta("property", "og:url", seo.canonical);
@@ -45,6 +49,13 @@ export default function SEO() {
     upsertMeta("property", "og:site_name", "中國香港硬地滾球總會 | The Boccia Association of Hong Kong, China Limited");
     upsertMeta("property", "og:locale", seo.locale);
     upsertMeta("property", "og:locale:alternate", seo.language === "en" ? "zh_HK" : "en_HK");
+    if (seo.ogType === "article") {
+      upsertMeta("property", "article:published_time", seo.articlePublishedTime);
+      upsertMeta("property", "article:modified_time", seo.articleModifiedTime);
+    } else {
+      removeMeta("property", "article:published_time");
+      removeMeta("property", "article:modified_time");
+    }
     upsertMeta("name", "twitter:card", "summary_large_image");
     upsertMeta("name", "twitter:title", seo.title);
     upsertMeta("name", "twitter:description", seo.description);

@@ -33,6 +33,7 @@ export default function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/game" element={<Game />} />
           <Route path="/rules/what-is-boccia" element={<KnowledgeArticle />} />
+          <Route path="/rules/who-can-play-boccia" element={<KnowledgeArticle />} />
           <Route path="/en" element={<Home />} />
           <Route path="/en/about" element={<About />} />
           <Route path="/en/rules" element={<Rules />} />
@@ -43,6 +44,7 @@ export default function App() {
           <Route path="/en/contact" element={<Contact />} />
           <Route path="/en/game" element={<Game />} />
           <Route path="/en/rules/what-is-boccia" element={<KnowledgeArticle />} />
+          <Route path="/en/rules/who-can-play-boccia" element={<KnowledgeArticle />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>

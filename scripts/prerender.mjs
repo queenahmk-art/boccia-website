@@ -21,6 +21,11 @@ function createHead(seo, runtimeTags, structuredData) {
     ? `<script type="application/ld+json" data-site-structured-data="true">${JSON.stringify(structuredData).replaceAll("<", "\\u003c")}</script>`
     : "";
 
+  const articleMeta = seo.ogType === "article"
+    ? `<meta property="article:published_time" content="${seo.articlePublishedTime}" />
+    <meta property="article:modified_time" content="${seo.articleModifiedTime}" />`
+    : "";
+
   return `<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -31,7 +36,7 @@ function createHead(seo, runtimeTags, structuredData) {
     <link rel="alternate" hreflang="zh-Hant" href="${seo.zhUrl}" />
     <link rel="alternate" hreflang="en" href="${seo.enUrl}" />
     <link rel="alternate" hreflang="x-default" href="${seo.zhUrl}" />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content="${seo.ogType || "website"}" />
     <meta property="og:title" content="${escapeHtml(seo.title)}" />
     <meta property="og:description" content="${escapeHtml(seo.description)}" />
     <meta property="og:url" content="${seo.canonical}" />
@@ -39,6 +44,7 @@ function createHead(seo, runtimeTags, structuredData) {
     <meta property="og:site_name" content="中國香港硬地滾球總會 | The Boccia Association of Hong Kong, China Limited" />
     <meta property="og:locale" content="${seo.locale}" />
     <meta property="og:locale:alternate" content="${seo.language === "en" ? "zh_HK" : "en_HK"}" />
+    ${articleMeta}
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="${escapeHtml(seo.title)}" />
     <meta name="twitter:description" content="${escapeHtml(seo.description)}" />

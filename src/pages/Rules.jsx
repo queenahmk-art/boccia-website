@@ -2,12 +2,14 @@ import { Link } from "react-router-dom";
 import FeatureStrip from "../components/FeatureStrip.jsx";
 import RuleCard from "../components/RuleCard.jsx";
 import SectionHeading from "../components/SectionHeading.jsx";
+import { bocciaArticles } from "../data/articles.js";
 import { assetMeta, assets } from "../data/siteData.js";
 import { useSiteContent } from "../hooks/useSiteContent.js";
 
 export default function Rules() {
-  const { content, link } = useSiteContent();
+  const { content, lang } = useSiteContent();
   const { rules } = content;
+  const featuredArticles = bocciaArticles[lang];
 
   return (
     <>
@@ -52,20 +54,31 @@ export default function Rules() {
       </section>
 
       <section className="section rules-article-section">
-        <div>
+        <div className="rules-article-heading">
           <SectionHeading kicker={rules.articleKicker} copy={rules.articleCopy} />
-          <Link className="btn secondary" to={link("/rules/what-is-boccia")}>
-            {rules.articleAction}
-          </Link>
         </div>
-        <img
-          src={assets.bocciaImage}
-          alt={rules.articleImageAlt}
-          width={assetMeta.bocciaImage.width}
-          height={assetMeta.bocciaImage.height}
-          loading="lazy"
-          decoding="async"
-        />
+        <div className="rules-article-grid">
+          {featuredArticles.map((article) => (
+            <article className="rules-article-card" key={article.slug}>
+              <img
+                src={article.image}
+                alt={article.imageAlt}
+                width={article.imageWidth}
+                height={article.imageHeight}
+                loading="lazy"
+                decoding="async"
+              />
+              <div>
+                <p className="section-kicker">{article.category}</p>
+                <h2>{article.title}</h2>
+                <p>{article.cardDescription || article.description}</p>
+                <Link className="btn secondary" to={`${article.path}/`}>
+                  {rules.articleAction}
+                </Link>
+              </div>
+            </article>
+          ))}
+        </div>
       </section>
     </>
   );

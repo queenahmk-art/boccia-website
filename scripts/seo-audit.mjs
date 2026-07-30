@@ -1,6 +1,7 @@
 import { access, readFile, readdir } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { getArticleSeoRecord } from "../src/data/articleSeoData.js";
 import { SITE_URL, getSeo, getStructuredData, staticRoutes } from "../src/data/seo.js";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -66,10 +67,11 @@ function validateJsonLd(scope, html, seo) {
   try {
     const data = JSON.parse(scripts[0][1]);
     const graph = data["@graph"];
-    const isArticle = seo.path.endsWith("/what-is-boccia");
+    const articleRecord = getArticleSeoRecord(seo.path);
+    const isArticle = Boolean(articleRecord);
     const isEquipment = seo.path === "/equipment" || seo.path === "/en/equipment";
     const expectedTypes = isArticle
-      ? ["Article", "WebPage", "BreadcrumbList"]
+      ? ["Article", "WebPage", "BreadcrumbList", ...(articleRecord.faqs.length ? ["FAQPage"] : [])]
       : isEquipment
         ? ["WebPage", "BreadcrumbList"]
         : ["Organization", "SportsOrganization", "WebSite", "WebPage"];
@@ -95,11 +97,31 @@ function validateJsonLd(scope, html, seo) {
 
     if (isArticle) {
       const article = graph.find((item) => item["@type"] === "Article");
-      for (const field of ["headline", "description", "mainEntityOfPage", "inLanguage", "datePublished", "dateModified", "author", "publisher", "url"]) {
+      for (const field of ["headline", "description", "mainEntityOfPage", "inLanguage", "datePublished", "dateModified", "author", "publisher", "image", "url"]) {
         if (!article?.[field]) fail(scope, `Article JSON-LD is missing ${field}`);
       }
+      if (article?.headline !== articleRecord.title) fail(scope, "Article JSON-LD headline does not match the visible article");
+      if (article?.datePublished !== articleRecord.publishedDate) fail(scope, "Article JSON-LD datePublished does not match article data");
+      if (article?.dateModified !== articleRecord.modifiedDate) fail(scope, "Article JSON-LD dateModified does not match article data");
       const breadcrumb = graph.find((item) => item["@type"] === "BreadcrumbList");
       if (!breadcrumb?.itemListElement?.length) fail(scope, "Article JSON-LD is missing breadcrumb items");
+
+      const faqPage = graph.find((item) => item["@type"] === "FAQPage");
+      if (articleRecord.faqs.length) {
+        const schemaFaqs = faqPage?.mainEntity || [];
+        if (schemaFaqs.length !== articleRecord.faqs.length) {
+          fail(scope, `FAQPage must contain ${articleRecord.faqs.length} questions`);
+        }
+        for (const [index, faq] of articleRecord.faqs.entries()) {
+          if (schemaFaqs[index]?.name !== faq.question) fail(scope, `FAQPage question ${index + 1} does not match article data`);
+          if (schemaFaqs[index]?.acceptedAnswer?.text !== faq.answer) fail(scope, `FAQPage answer ${index + 1} does not match article data`);
+          if (!decodeEntities(html).includes(faq.question) || !decodeEntities(html).includes(faq.answer)) {
+            fail(scope, `FAQ ${index + 1} is not visible in the prerendered article`);
+          }
+        }
+      } else if (faqPage) {
+        fail(scope, "FAQPage schema must not be present without visible FAQs");
+      }
     }
 
     if (isEquipment) {
@@ -127,6 +149,7 @@ async function validateRoute(route) {
   const lang = extractAttribute(html, /<html lang="([^"]*)"/);
   const main = extractAttribute(html, /<main>([\s\S]*?)<\/main>/);
   const decodedHtml = decodeEntities(html);
+  const articleRecord = getArticleSeoRecord(seo.path);
 
   if (title !== seo.title) fail(scope, `title does not match SEO data`);
   if (description !== seo.description) fail(scope, `meta description does not match SEO data`);
@@ -149,10 +172,17 @@ async function validateRoute(route) {
   assertIncludes(scope, decodedHtml, `<meta property="og:title" content="${seo.title}"`, "Open Graph title");
   assertIncludes(scope, decodedHtml, `<meta property="og:description" content="${seo.description}"`, "Open Graph description");
   assertIncludes(scope, decodedHtml, `<meta property="og:url" content="${seo.canonical}"`, "Open Graph URL");
+  assertIncludes(scope, decodedHtml, `<meta property="og:type" content="${articleRecord ? "article" : "website"}"`, "Open Graph type");
   assertIncludes(scope, decodedHtml, '<meta name="twitter:card" content="summary_large_image"', "Twitter Card metadata");
   assertIncludes(scope, decodedHtml, `<link rel="alternate" hreflang="zh-Hant" href="${seo.zhUrl}"`, "zh-Hant hreflang");
   assertIncludes(scope, decodedHtml, `<link rel="alternate" hreflang="en" href="${seo.enUrl}"`, "English hreflang");
   assertIncludes(scope, decodedHtml, `<link rel="alternate" hreflang="x-default" href="${seo.zhUrl}"`, "x-default hreflang");
+  if (articleRecord) {
+    const h1 = decodeHtml(extractAttribute(html, /<h1[^>]*>([\s\S]*?)<\/h1>/));
+    if (h1 !== articleRecord.title) fail(scope, `visible H1 does not match "${articleRecord.title}"`);
+    assertIncludes(scope, decodedHtml, `<meta property="article:published_time" content="${articleRecord.publishedDate}"`, "article published time");
+    assertIncludes(scope, decodedHtml, `<meta property="article:modified_time" content="${articleRecord.modifiedDate}"`, "article modified time");
+  }
   validateJsonLd(scope, html, seo);
 }
 
@@ -243,6 +273,32 @@ for (const route of ["/rules/what-is-boccia", "/en/rules/what-is-boccia"]) {
   }
 }
 
+for (const route of ["/rules/who-can-play-boccia", "/en/rules/who-can-play-boccia"]) {
+  const html = await readRequired(path.join(route.slice(1), "index.html"));
+  const articleRecord = getArticleSeoRecord(route);
+  const requiredPhrases = route.startsWith("/en/")
+    ? [
+        "Who Can Play Boccia?",
+        "Why Is Boccia Suitable for Different People?",
+        "Can Children Play Boccia?",
+        "Can Older Adults Play Boccia?",
+        "Frequently Asked Questions",
+      ]
+    : [
+        "硬地滾球適合哪些人士？",
+        "為什麼硬地滾球適合不同人士？",
+        "小朋友適合玩硬地滾球嗎？",
+        "長者為什麼適合參與硬地滾球？",
+        "常見問題",
+      ];
+  for (const phrase of requiredPhrases) {
+    if (!decodeEntities(html).includes(phrase)) fail(route, `initial HTML is missing article content: ${phrase}`);
+  }
+  if (!html.includes("<table")) fail(route, "initial HTML is missing the semantic summary table");
+  if ((html.match(/<th\b/g) || []).length < 2) fail(route, "summary table is missing semantic table headers");
+  if ((html.match(/<h3\b/g) || []).length < articleRecord.faqs.length) fail(route, "visible FAQ headings are incomplete");
+}
+
 for (const route of staticRoutes) {
   if (route.startsWith("/knowledge")) fail("routes", `legacy Knowledge route remains: ${route}`);
 }
@@ -251,6 +307,12 @@ for (const route of ["/rules", "/en/rules"]) {
   const html = await readRequired(path.join(route.slice(1), "index.html"));
   const phrase = route.startsWith("/en/") ? "Learn More About Boccia" : "延伸認識硬地滾球";
   if (!html.includes(phrase)) fail(route, "is missing the related Boccia article extension");
+  const articleTitles = route.startsWith("/en/")
+    ? ["What Is Boccia?", "Who Can Play Boccia?"]
+    : ["什麼是硬地滾球（Boccia）？", "硬地滾球適合哪些人士？"];
+  for (const title of articleTitles) {
+    if (!decodeEntities(html).includes(title)) fail(route, `is missing article card: ${title}`);
+  }
 }
 
 for (const route of ["/equipment", "/en/equipment"]) {

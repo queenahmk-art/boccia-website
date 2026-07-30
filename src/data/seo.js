@@ -1,3 +1,5 @@
+import { getArticleSeoRecord } from "./articleSeoData.js";
+
 export const SITE_URL = "https://hkboccia.com.hk";
 export const OG_IMAGE_URL = `${SITE_URL}/og-boccia.jpg`;
 
@@ -42,6 +44,10 @@ const zh = {
     title: "什麼是硬地滾球（Boccia）？玩法、球具及比賽形式｜中國香港硬地滾球總會",
     description: "什麼是硬地滾球？本文介紹 Boccia 的基本玩法、紅藍球及白色目標球 Jack、個人賽、雙人賽和團體賽，以及適合參與的人士。",
   },
+  "/rules/who-can-play-boccia": {
+    title: "硬地滾球適合哪些人士？小朋友、長者及共融活動介紹",
+    description: "硬地滾球適合不同年齡及能力人士參與，包括小朋友、SEN學生、長者、復康人士及傷健共融團體。了解硬地滾球如何讓參加者練習專注、策略思維、社交互動及團隊合作。",
+  },
 };
 
 const en = {
@@ -85,6 +91,10 @@ const en = {
     title: "What Is Boccia? Rules, Equipment and Competition Formats｜Boccia Hong Kong",
     description: "Discover what Boccia is, how the sport is played, the red and blue balls and white Jack, its competition formats, and who can take part.",
   },
+  "/en/rules/who-can-play-boccia": {
+    title: "Who Can Play Boccia? Children, Seniors and Inclusive Activities",
+    description: "Learn how children, students with special educational needs, older adults, rehabilitation participants and people of different abilities can take part in community and introductory boccia activities.",
+  },
 };
 
 const notFound = {
@@ -123,6 +133,7 @@ export function getSeo(pathname) {
   const path = normalisePath(pathname);
   const language = isEnglishPath(path) ? "en" : "zh";
   const page = (language === "en" ? en : zh)[path];
+  const article = getArticleSeoRecord(path);
   const { zhPath, enPath } = getAlternatePaths(path);
 
   if (!page) {
@@ -148,6 +159,9 @@ export function getSeo(pathname) {
     zhUrl: toCanonicalUrl(zhPath),
     enUrl: toCanonicalUrl(enPath),
     noindex: false,
+    ogType: article ? "article" : "website",
+    articlePublishedTime: article?.publishedDate,
+    articleModifiedTime: article?.modifiedDate,
   };
 }
 
@@ -225,9 +239,7 @@ function getBreadcrumbStructuredData(seo, labels) {
 
 export function getStructuredData(pathname) {
   const seo = getSeo(pathname);
-  const article = seo.path.endsWith("/what-is-boccia")
-    ? { title: seo.title, publishedDate: "2026-07-12" }
-    : null;
+  const article = getArticleSeoRecord(seo.path);
   if (article) {
     const isEnglish = seo.language === "en";
     const labels = isEnglish
@@ -241,7 +253,6 @@ export function getStructuredData(pathname) {
           { name: "認識硬地滾球", path: "/rules" },
           { name: article.title, path: seo.path },
         ];
-    const organisationName = isEnglish ? "The Boccia Association of Hong Kong, China" : "中國香港硬地滾球總會";
     const organisationUrl = `${SITE_URL}/`;
     const webpage = {
       "@type": "WebPage",
@@ -252,26 +263,43 @@ export function getStructuredData(pathname) {
       inLanguage: seo.lang,
       isPartOf: { "@id": `${SITE_URL}/#website` },
     };
+    const graph = [
+      {
+        "@type": "Article",
+        "@id": `${seo.canonical}#article`,
+        headline: article.title,
+        description: seo.description,
+        mainEntityOfPage: { "@id": `${seo.canonical}#webpage` },
+        inLanguage: seo.lang,
+        datePublished: article.publishedDate,
+        dateModified: article.modifiedDate,
+        author: { "@type": "Organization", name: article.publishedBy, url: organisationUrl },
+        publisher: { "@type": "Organization", name: article.publishedBy, url: organisationUrl },
+        image: OG_IMAGE_URL,
+        url: seo.canonical,
+      },
+      webpage,
+      getBreadcrumbStructuredData(seo, labels),
+    ];
+
+    if (article.faqs?.length) {
+      graph.push({
+        "@type": "FAQPage",
+        "@id": `${seo.canonical}#faq`,
+        mainEntity: article.faqs.map((faq) => ({
+          "@type": "Question",
+          name: faq.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: faq.answer,
+          },
+        })),
+      });
+    }
+
     return {
       "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "Article",
-          "@id": `${seo.canonical}#article`,
-          headline: article.title,
-          description: seo.description,
-          mainEntityOfPage: { "@id": `${seo.canonical}#webpage` },
-          inLanguage: seo.lang,
-          datePublished: article.publishedDate,
-          dateModified: article.publishedDate,
-          author: { "@type": "Organization", name: organisationName, url: organisationUrl },
-          publisher: { "@type": "Organization", name: organisationName, url: organisationUrl },
-          image: OG_IMAGE_URL,
-          url: seo.canonical,
-        },
-        webpage,
-        getBreadcrumbStructuredData(seo, labels),
-      ],
+      "@graph": graph,
     };
   }
 
