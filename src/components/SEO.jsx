@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router";
 import { getSeo, getStructuredData, OG_IMAGE_URL } from "../data/seo.js";
 
 function upsertMeta(attribute, name, content) {

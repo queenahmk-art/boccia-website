@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { assetMeta, assets } from "../data/siteData.js";
 import { useSiteContent } from "../hooks/useSiteContent.js";
 

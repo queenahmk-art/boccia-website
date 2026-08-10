@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { contact } from "../data/siteData.js";
 import { useSiteContent } from "../hooks/useSiteContent.js";
 

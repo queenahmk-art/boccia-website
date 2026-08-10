@@ -548,7 +548,6 @@ p {
 
 .game-frame-shell {
   width: min(1540px, 100%);
-  min-height: 780px;
   margin-inline: auto;
   overflow: hidden;
   border: 1px solid var(--line);
@@ -557,26 +556,10 @@ p {
   box-shadow: var(--shadow);
 }
 
-.game-frame-shell iframe {
-  display: block;
+.integrated-boccia-game {
   width: 100%;
-  height: min(1040px, calc(100vh - 40px));
-  min-height: 780px;
-  border: 0;
-}
-
-.game-frame-help {
-  width: min(1540px, 100%);
-  margin: 18px auto 0;
-  color: var(--muted);
-  text-align: center;
-}
-
-.game-frame-help a {
-  color: var(--red);
-  font-weight: 950;
-  text-decoration: underline;
-  text-underline-offset: 3px;
+  min-width: 0;
+  scroll-margin-top: 96px;
 }
 
 .offer-grid,
@@ -2051,14 +2034,8 @@ p {
   }
 
   .game-frame-shell {
-    min-height: 720px;
     border-inline: 0;
     border-radius: 0;
-  }
-
-  .game-frame-shell iframe {
-    height: calc(100svh - 24px);
-    min-height: 720px;
   }
 
   .site-nav.is-open {

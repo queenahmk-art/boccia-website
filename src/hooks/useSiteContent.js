@@ -1,30 +1,8 @@
-import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router";
 import { siteContent } from "../data/siteData.js";
+import { getLanguageFromPath, getLocalizedPath, switchLanguagePath } from "../utils/languagePath.js";
 
-export function getLanguageFromPath(pathname) {
-  return pathname === "/en" || pathname.startsWith("/en/") ? "en" : "zh";
-}
-
-export function getLocalizedPath(path, lang) {
-  const withTrailingSlash = path === "/" ? "/" : `${path.replace(/\/$/, "")}/`;
-
-  if (lang === "en") {
-    return path === "/" ? "/en/" : `/en${withTrailingSlash}`;
-  }
-  return withTrailingSlash;
-}
-
-export function switchLanguagePath(pathname) {
-  const path = pathname.length > 1 ? pathname.replace(/\/$/, "") : pathname;
-
-  if (path === "/en") {
-    return "/";
-  }
-  if (path.startsWith("/en/")) {
-    return `${path.replace(/^\/en/, "")}/`;
-  }
-  return path === "/" ? "/en/" : `/en${path}/`;
-}
+export { getLanguageFromPath, getLocalizedPath, switchLanguagePath } from "../utils/languagePath.js";
 
 export function useSiteContent() {
   const location = useLocation();

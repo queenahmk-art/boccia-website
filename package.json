@@ -7,7 +7,8 @@
     "dev": "vite --host 127.0.0.1",
     "build": "vite build && node scripts/prerender.mjs",
     "security:audit": "node scripts/workflow-security-audit.mjs",
-    "test:security": "node --test scripts/workflow-security-audit.test.mjs",
+    "test:game": "vitest run src/features/boccia-game/tests",
+    "test:security": "node --test scripts/workflow-security-audit.test.mjs scripts/language-path-security.test.mjs",
     "seo:audit": "node scripts/seo-audit.mjs",
     "preview": "vite preview --host 127.0.0.1"
   },
@@ -15,10 +16,11 @@
     "@vitejs/plugin-react": "^4.3.4",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^6.28.1",
+    "react-router": "^7.18.2",
     "vite": "^6.0.7"
   },
   "devDependencies": {
-    "playwright": "^1.61.1"
+    "playwright": "^1.61.1",
+    "vitest": "^4.1.10"
   }
 }

@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router";
 import { assetMeta, assets } from "../data/siteData.js";
 import { getBocciaArticle } from "../data/articles.js";
 import { useSiteContent } from "../hooks/useSiteContent.js";

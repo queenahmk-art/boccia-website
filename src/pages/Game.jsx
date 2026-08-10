@@ -1,11 +1,11 @@
 import { useSiteContent } from "../hooks/useSiteContent.js";
-
-const GAME_URL = "https://queenahmk-art.github.io/bocciagame/";
+import BocciaGame from "../features/boccia-game/game/BocciaGame.jsx";
 
 export default function Game() {
   const { content, lang } = useSiteContent();
   const { gamePage } = content;
-  const gameUrl = lang === "en" ? `${GAME_URL}?lang=en` : GAME_URL;
+  const gameLanguage = lang === "en" ? "en-HK" : "zh-Hant-HK";
+  const localizedPath = (path) => lang === "en" ? `/en${path}` : path;
 
   return (
     <>
@@ -15,26 +15,24 @@ export default function Game() {
         <p>{gamePage.intro}</p>
         <p>{gamePage.guide}</p>
         <p>{gamePage.accessibility}</p>
-        <a className="btn secondary" href={gameUrl} target="_blank" rel="noreferrer">
+        <a className="btn secondary" href="#boccia-game">
           {gamePage.openAction}
         </a>
       </section>
 
       <section className="game-frame-section" aria-label={gamePage.frameLabel}>
         <div className="game-frame-shell">
-          <iframe
-            src={gameUrl}
-            title={gamePage.frameTitle}
-            allow="fullscreen"
-            loading="eager"
-          />
+          <section id="boccia-game" className="integrated-boccia-game">
+            <BocciaGame
+              key={gameLanguage}
+              initialLanguage={gameLanguage}
+              integratedMode
+              showHeader={false}
+              rulesUrl={localizedPath("/rules")}
+              contactUrl={localizedPath("/contact")}
+            />
+          </section>
         </div>
-        <p className="game-frame-help">
-          {gamePage.fallback}{" "}
-          <a href={gameUrl} target="_blank" rel="noreferrer">
-            {gamePage.fallbackAction}
-          </a>
-        </p>
       </section>
     </>
   );

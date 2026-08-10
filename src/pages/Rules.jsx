@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import FeatureStrip from "../components/FeatureStrip.jsx";
 import RuleCard from "../components/RuleCard.jsx";
 import SectionHeading from "../components/SectionHeading.jsx";
