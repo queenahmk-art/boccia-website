@@ -4,6 +4,8 @@ import coachTraining from "../assets/coach-training.jpg";
 import rulesImage from "../assets/rules.jpg";
 import victorySportsBoccia from "../assets/victory-sports-boccia.png";
 import handilifeSportsBoccia from "../assets/handilife-sports-boccia.png";
+import hkBocciaAssociationSet from "../assets/hk-boccia-association-set.png";
+import refereeEquipment from "../assets/referee-equipment.png";
 import schoolBocciaExperience from "../assets/school-boccia-experience.png";
 import eventImage from "../../promo.jpg";
 import bocciaImage from "../../Boccia.jpg";
@@ -36,6 +38,72 @@ export const contact = {
 export const equipmentProducts = [
   { category: "boccia-balls", brandName: "Victory Sports", image: victorySportsBoccia, imageAlt: "Victory Sports 硬地滾球" },
   { category: "boccia-balls", brandName: "Handilife Sports", image: handilifeSportsBoccia, imageAlt: "Handilife Sports 硬地滾球套裝" },
+  {
+    category: "boccia-balls",
+    brandName: "硬地滾球總會套裝",
+    image: hkBocciaAssociationSet,
+    imageFit: "contain",
+    details: {
+      zh: {
+        name: "硬地滾球總會套裝",
+        imageAlt: "硬地滾球總會套裝，包括六個紅色球、六個藍色球、一個白色 Jack Ball 及黑色收納袋",
+        suitableLabel: "適合人士：",
+        suitableFor: "初學人士、學校、社福機構、硬地滾球體驗活動及日常練習使用。",
+        description: [
+          "硬地滾球總會套裝專為初學人士、學校、社福機構及硬地滾球體驗活動而設。套裝包括 6 個紅色球、6 個藍色球及 1 個白色 Jack Ball，共 13 個硬地滾球，提供進行基本硬地滾球練習及對賽所需的完整球具組合。",
+          "套裝設計適合初次接觸硬地滾球的人士使用，可用於認識基本玩法、投擲練習、課堂教學、機構活動及日常訓練。",
+        ],
+        contentsTitle: "每套包括：",
+        contents: ["6 個紅色硬地滾球", "6 個藍色硬地滾球", "1 個白色 Jack Ball"],
+        total: "合共 13 個硬地滾球。",
+      },
+      en: {
+        name: "HK Boccia Association Boccia Set",
+        imageAlt: "HK Boccia Association Boccia Set with six red balls, six blue balls, one white Jack Ball, and a black storage bag",
+        suitableLabel: "Suitable for: ",
+        suitableFor: "Beginners, schools, social welfare organisations, boccia experience activities, and daily practice.",
+        description: [
+          "The HK Boccia Association Boccia Set is designed for beginners, schools, social welfare organisations, and boccia experience activities. The set includes 6 red balls, 6 blue balls, and 1 white Jack Ball, for a total of 13 boccia balls, providing a complete equipment set for basic boccia practice and play.",
+          "The set is suitable for people trying boccia for the first time and can be used to learn the basic rules, practise throwing, support classroom teaching, run organisational activities, and conduct daily training.",
+        ],
+        contentsTitle: "Each set includes:",
+        contents: ["6 red boccia balls", "6 blue boccia balls", "1 white Jack Ball"],
+        total: "13 boccia balls in total.",
+      },
+    },
+  },
+  {
+    category: "referee-equipment",
+    brandName: "裁判用具",
+    image: refereeEquipment,
+    imageFit: "contain",
+    details: {
+      zh: {
+        name: "裁判用具",
+        imageAlt: "裁判用具套裝，包括裁判板、量度距離尺、量度卡尺及收納袋",
+        suitableLabel: "產品分類：",
+        suitableFor: "硬地滾球裁判用具",
+        description: [
+          "裁判用具套裝為硬地滾球裁判、教練及活動工作人員提供進行基本場上判斷及距離量度所需的常用工具。套裝包括裁判板、量度距離尺、量度卡尺及收納袋，方便整理、攜帶及於訓練、活動或比賽期間使用。",
+        ],
+        contentsTitle: "每套包括：",
+        contents: ["裁判板", "量度距離尺", "量度卡尺", "收納袋"],
+        total: "合共 4 件裁判用具。",
+      },
+      en: {
+        name: "Boccia Referee Equipment Set",
+        imageAlt: "Boccia Referee Equipment Set with a referee paddle, distance measuring tape, measuring caliper, and storage bag",
+        suitableLabel: "Product category: ",
+        suitableFor: "Boccia referee equipment",
+        description: [
+          "The Boccia Referee Equipment Set provides boccia referees, coaches, and event staff with commonly used tools for basic on-court decisions and distance measurement. The set includes a referee paddle, distance measuring tape, measuring caliper, and storage bag for convenient organisation, carrying, and use during training, activities, or competitions.",
+        ],
+        contentsTitle: "Each set includes:",
+        contents: ["Referee paddle", "Distance measuring tape", "Measuring caliper", "Storage bag"],
+        total: "4 pieces of referee equipment in total.",
+      },
+    },
+  },
 ];
 
 export function createWhatsAppUrl(message) {

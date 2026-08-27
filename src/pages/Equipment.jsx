@@ -6,16 +6,26 @@ import {
 } from "../data/siteData.js";
 import { useSiteContent } from "../hooks/useSiteContent.js";
 
-function EnquiryActions({ page, message, className = "" }) {
+function EnquiryActions({
+  page,
+  message,
+  emailSubject,
+  emailBody,
+  emailClassName = "ghost",
+  className = "",
+}) {
   const whatsappHref = createWhatsAppUrl(message || page.whatsappMessage);
-  const emailHref = createMailtoUrl(page.emailSubject, page.emailBody);
+  const emailHref = createMailtoUrl(
+    emailSubject || page.emailSubject,
+    emailBody || page.emailBody,
+  );
 
   return (
     <div className={`equipment-actions ${className}`.trim()}>
       <a className="btn primary" href={whatsappHref} target="_blank" rel="noreferrer">
         {page.whatsappAction}
       </a>
-      <a className="btn ghost" href={emailHref}>
+      <a className={`btn ${emailClassName}`} href={emailHref}>
         {page.emailAction}
       </a>
     </div>
@@ -23,7 +33,7 @@ function EnquiryActions({ page, message, className = "" }) {
 }
 
 export default function Equipment() {
-  const { content } = useSiteContent();
+  const { content, lang } = useSiteContent();
   const page = content.equipmentPage;
 
   return (
@@ -39,13 +49,34 @@ export default function Equipment() {
         <SectionHeading kicker={page.ballsKicker} />
         <div className="equipment-brand-grid" aria-label={page.brandsLabel}>
           {equipmentProducts
-            .filter((product) => product.category === "boccia-balls")
-            .map((product) => (
-              <article key={product.brandName} className="equipment-brand-card">
-                <img src={product.image} alt={product.imageAlt} loading="lazy" decoding="async" />
-                <h2>{product.brandName}</h2>
-              </article>
-            ))}
+            .filter((product) => ["boccia-balls", "referee-equipment"].includes(product.category))
+            .map((product) => {
+              const details = product.details?.[lang];
+
+              return (
+                <article key={product.brandName} className="equipment-brand-card">
+                  <img
+                    src={product.image}
+                    alt={details?.imageAlt || product.imageAlt}
+                    loading="lazy"
+                    decoding="async"
+                    style={product.imageFit ? { objectFit: product.imageFit } : undefined}
+                  />
+                  <h2>{details?.name || product.brandName}</h2>
+                  {details ? (
+                    <>
+                      <p><strong>{details.suitableLabel}</strong>{details.suitableFor}</p>
+                      {details.description.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+                      <p><strong>{details.contentsTitle}</strong></p>
+                      <ul>
+                        {details.contents.map((item) => <li key={item}>{item}</li>)}
+                      </ul>
+                      <p><strong>{details.total}</strong></p>
+                    </>
+                  ) : null}
+                </article>
+              );
+            })}
         </div>
       </section>
 
