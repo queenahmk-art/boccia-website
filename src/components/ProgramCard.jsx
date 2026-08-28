@@ -8,6 +8,7 @@ export default function ProgramCard({ item, to = "/contact", compact = false }) 
     <article className={`program-card ${compact ? "compact" : ""} ${item.photoFrame ? "photo-frame" : ""}`}>
       <div className="program-media">
         <img
+          className={item.imageClassName || undefined}
           src={item.image}
           alt={item.title}
           width={imageDimensions.width}

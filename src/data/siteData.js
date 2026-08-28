@@ -6,6 +6,7 @@ import victorySportsBoccia from "../assets/victory-sports-boccia.png";
 import handilifeSportsBoccia from "../assets/handilife-sports-boccia.png";
 import hkBocciaAssociationSet from "../assets/hk-boccia-association-set.png";
 import refereeEquipment from "../assets/referee-equipment.png";
+import equipmentRentalColor from "../assets/equipment-rental-color.jpg";
 import schoolBocciaExperience from "../assets/school-boccia-experience.png";
 import eventImage from "../../promo.jpg";
 import bocciaImage from "../../Boccia.jpg";
@@ -17,6 +18,7 @@ export const assetMeta = {
   rulesImage: { src: rulesImage, width: 1024, height: 1024 },
   eventImage: { src: eventImage, width: 1024, height: 1024 },
   bocciaImage: { src: bocciaImage, width: 400, height: 400 },
+  equipmentRentalColor: { src: equipmentRentalColor, width: 1536, height: 1024 },
   schoolBocciaExperience: { src: schoolBocciaExperience, width: 1254, height: 1254 },
 };
 
@@ -223,7 +225,8 @@ export const siteContent = {
         number: "03",
         title: "球具租借",
         label: "服務 03",
-        image: bocciaImage,
+        image: equipmentRentalColor,
+        imageClassName: "rental-equipment-image",
         photoFrame: true,
         copy: "本會提供不同規格的硬地滾球套裝租借服務，方便不同機構及團體舉辦活動。",
         bullets: ["學校", "社福機構", "企業", "社區團體"],
@@ -495,7 +498,8 @@ export const siteContent = {
         number: "03",
         title: "Equipment Rental",
         label: "Equipment Support",
-        image: bocciaImage,
+        image: equipmentRentalColor,
+        imageClassName: "rental-equipment-image",
         photoFrame: true,
         copy: "We provide boccia equipment rental support for organisations and groups running activities.",
         bullets: ["Schools", "Social service organisations", "Companies", "Community groups"],
