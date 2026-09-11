@@ -168,9 +168,18 @@ async function validateRoute(route) {
   assertIncludes(scope, decodedHtml, `<meta property="og:url" content="${seo.canonical}"`, "Open Graph URL");
   assertIncludes(scope, decodedHtml, `<meta property="og:type" content="${articleRecord ? "article" : "website"}"`, "Open Graph type");
   assertIncludes(scope, decodedHtml, '<meta name="twitter:card" content="summary_large_image"', "Twitter Card metadata");
-  assertIncludes(scope, decodedHtml, `<link rel="alternate" hreflang="zh-Hant" href="${seo.zhUrl}"`, "zh-Hant hreflang");
-  assertIncludes(scope, decodedHtml, `<link rel="alternate" hreflang="en" href="${seo.enUrl}"`, "English hreflang");
-  assertIncludes(scope, decodedHtml, `<link rel="alternate" hreflang="x-default" href="${seo.zhUrl}"`, "x-default hreflang");
+  for (const [hreflang, url, label] of [
+    ["zh-Hant", seo.zhUrl, "zh-Hant hreflang"],
+    ["en", seo.enUrl, "English hreflang"],
+    ["x-default", seo.zhUrl, "x-default hreflang"],
+  ]) {
+    const link = `<link rel="alternate" hreflang="${hreflang}"`;
+    if (url) {
+      assertIncludes(scope, decodedHtml, `${link} href="${url}"`, label);
+    } else if (decodedHtml.includes(link)) {
+      fail(scope, `${label} points to a route that does not exist`);
+    }
+  }
   if (articleRecord) {
     const h1 = decodeHtml(extractAttribute(html, /<h1[^>]*>([\s\S]*?)<\/h1>/));
     if (h1 !== articleRecord.title) fail(scope, `visible H1 does not match "${articleRecord.title}"`);

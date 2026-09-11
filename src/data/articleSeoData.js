@@ -52,6 +52,27 @@ export const articleSeoRecords = {
       },
     ],
   },
+  "/rules/boccia-equipment-guide": {
+    language: "zh",
+    title: "硬地滾球需要什麼器材？初學者球具指南",
+    publishedBy: "中國香港硬地滾球總會",
+    publishedDate: "2026-09-10",
+    modifiedDate: "2026-09-10",
+    faqs: [
+      {
+        question: "一套硬地滾球有多少個球？",
+        answer: "一套共有13個球，包括6個紅色球、6個藍色球及1個白色目標球。",
+      },
+      {
+        question: "初學者需要裁判工具嗎？",
+        answer: "一般體驗及初學訓練可以先使用基本球具；正式活動或比賽則可按需要加入裁判及量度工具。",
+      },
+      {
+        question: "學校及機構可以購買嗎？",
+        answer: "可以，可按照參加人數及活動形式選擇合適的球具數量。",
+      },
+    ],
+  },
   "/en/rules/who-can-play-boccia": {
     language: "en",
     title: "Who Can Play Boccia?",

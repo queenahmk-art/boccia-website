@@ -16,8 +16,12 @@ function removeMeta(attribute, name) {
   document.head.querySelector(`meta[${attribute}="${name}"]`)?.remove();
 }
 
-function upsertLink(rel, href, hreflang) {
+function syncLink(rel, href, hreflang) {
   const selector = hreflang ? `link[rel="${rel}"][hreflang="${hreflang}"]` : `link[rel="${rel}"]:not([hreflang])`;
+  if (!href) {
+    document.head.querySelector(selector)?.remove();
+    return;
+  }
   let element = document.head.querySelector(selector);
   if (!element) {
     element = document.createElement("link");
@@ -60,10 +64,10 @@ export default function SEO() {
     upsertMeta("name", "twitter:title", seo.title);
     upsertMeta("name", "twitter:description", seo.description);
     upsertMeta("name", "twitter:image", OG_IMAGE_URL);
-    upsertLink("canonical", seo.canonical);
-    upsertLink("alternate", seo.zhUrl, "zh-Hant");
-    upsertLink("alternate", seo.enUrl, "en");
-    upsertLink("alternate", seo.zhUrl, "x-default");
+    syncLink("canonical", seo.canonical);
+    syncLink("alternate", seo.zhUrl, "zh-Hant");
+    syncLink("alternate", seo.enUrl, "en");
+    syncLink("alternate", seo.zhUrl, "x-default");
 
     const existing = document.head.querySelector("script[data-site-structured-data]");
     if (structuredData) {

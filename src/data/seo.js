@@ -48,6 +48,10 @@ const zh = {
     title: "硬地滾球適合哪些人士？小朋友、長者及共融活動介紹",
     description: "硬地滾球適合不同年齡及能力人士參與，包括小朋友、SEN學生、長者、復康人士及傷健共融團體。了解硬地滾球如何讓參加者練習專注、策略思維、社交互動及團隊合作。",
   },
+  "/rules/boccia-equipment-guide": {
+    title: "硬地滾球需要什麼器材？紅藍白球用途及初學者球具指南｜中國香港硬地滾球總會",
+    description: "硬地滾球需要什麼器材？了解紅色、藍色及白色硬地滾球的用途、一套球具有多少個球、初學者需要準備什麼，以及香港購買硬地滾球的方法。",
+  },
 };
 
 const en = {
@@ -122,7 +126,10 @@ export function getAlternatePaths(pathname) {
   const zhPath = isEnglishPath(path) ? path.replace(/^\/en/, "") || "/" : path;
   const enPath = zhPath === "/" ? "/en" : `/en${zhPath}`;
 
-  return { zhPath, enPath };
+  return {
+    zhPath: zh[zhPath] ? zhPath : null,
+    enPath: en[enPath] ? enPath : null,
+  };
 }
 
 function toCanonicalUrl(pathname) {
@@ -144,8 +151,8 @@ export function getSeo(pathname) {
       locale: language === "en" ? "en_HK" : "zh_HK",
       lang: language === "en" ? "en-HK" : "zh-Hant-HK",
       canonical: toCanonicalUrl(path),
-      zhUrl: toCanonicalUrl(zhPath),
-      enUrl: toCanonicalUrl(enPath),
+      zhUrl: zhPath ? toCanonicalUrl(zhPath) : null,
+      enUrl: enPath ? toCanonicalUrl(enPath) : null,
     };
   }
 
@@ -156,8 +163,8 @@ export function getSeo(pathname) {
     locale: language === "en" ? "en_HK" : "zh_HK",
     lang: language === "en" ? "en-HK" : "zh-Hant-HK",
     canonical: toCanonicalUrl(path),
-    zhUrl: toCanonicalUrl(zhPath),
-    enUrl: toCanonicalUrl(enPath),
+    zhUrl: zhPath ? toCanonicalUrl(zhPath) : null,
+    enUrl: enPath ? toCanonicalUrl(enPath) : null,
     noindex: false,
     ogType: article ? "article" : "website",
     articlePublishedTime: article?.publishedDate,

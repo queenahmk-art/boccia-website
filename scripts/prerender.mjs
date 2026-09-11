@@ -20,6 +20,11 @@ function createHead(seo, runtimeTags, structuredData) {
   const jsonLd = structuredData
     ? `<script type="application/ld+json" data-site-structured-data="true">${JSON.stringify(structuredData).replaceAll("<", "\\u003c")}</script>`
     : "";
+  const alternateLinks = [
+    seo.zhUrl && `<link rel="alternate" hreflang="zh-Hant" href="${seo.zhUrl}" />`,
+    seo.enUrl && `<link rel="alternate" hreflang="en" href="${seo.enUrl}" />`,
+    seo.zhUrl && `<link rel="alternate" hreflang="x-default" href="${seo.zhUrl}" />`,
+  ].filter(Boolean).join("\n    ");
 
   const articleMeta = seo.ogType === "article"
     ? `<meta property="article:published_time" content="${seo.articlePublishedTime}" />
@@ -33,9 +38,7 @@ function createHead(seo, runtimeTags, structuredData) {
     <meta name="robots" content="index, follow" />
     <title>${escapeHtml(seo.title)}</title>
     <link rel="canonical" href="${seo.canonical}" />
-    <link rel="alternate" hreflang="zh-Hant" href="${seo.zhUrl}" />
-    <link rel="alternate" hreflang="en" href="${seo.enUrl}" />
-    <link rel="alternate" hreflang="x-default" href="${seo.zhUrl}" />
+    ${alternateLinks}
     <meta property="og:type" content="${seo.ogType || "website"}" />
     <meta property="og:title" content="${escapeHtml(seo.title)}" />
     <meta property="og:description" content="${escapeHtml(seo.description)}" />

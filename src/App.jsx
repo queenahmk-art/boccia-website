@@ -34,6 +34,7 @@ export default function App() {
           <Route path="/game" element={<Game />} />
           <Route path="/rules/what-is-boccia" element={<KnowledgeArticle />} />
           <Route path="/rules/who-can-play-boccia" element={<KnowledgeArticle />} />
+          <Route path="/rules/boccia-equipment-guide" element={<KnowledgeArticle />} />
           <Route path="/en" element={<Home />} />
           <Route path="/en/about" element={<About />} />
           <Route path="/en/rules" element={<Rules />} />

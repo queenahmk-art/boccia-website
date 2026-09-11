@@ -1,5 +1,6 @@
 import bocciaChildrenImage from "../assets/boccia-children.png";
 import bocciaAdultParticipantsImage from "../assets/boccia-adult-participants.png";
+import hkBocciaAssociationSetImage from "../assets/hk-boccia-association-set.png";
 import { assetMeta, assets } from "./siteData.js";
 
 const sharedSections = {
@@ -422,6 +423,81 @@ export const bocciaArticles = {
       ctaText: "中國香港硬地滾球總會為不同學校、機構及團體提供到校推廣、社區體驗、長者中心活動、傷健共融活動、教練及裁判培訓，以及球具和裁判用品查詢。\n\n無論參加者是小朋友、長者、初學者或不同能力人士，都可以聯絡本會商討合適的活動形式。",
       ctaAction: "立即聯絡我們",
       ctaPath: "/contact",
+    },
+    {
+      slug: "boccia-equipment-guide",
+      path: "/rules/boccia-equipment-guide",
+      category: "認識硬地滾球",
+      title: "硬地滾球需要什麼器材？初學者球具指南",
+      description: "硬地滾球需要什麼器材？了解紅色、藍色及白色硬地滾球的用途、一套球具有多少個球、初學者需要準備什麼，以及香港購買硬地滾球的方法。",
+      publishedBy: "中國香港硬地滾球總會",
+      publishedDate: "2026-09-10",
+      modifiedDate: "2026-09-10",
+      image: hkBocciaAssociationSetImage,
+      imageWidth: 1024,
+      imageHeight: 1024,
+      imageAlt: "硬地滾球球具套裝，包括紅色球、藍色球、白色目標球及收納袋",
+      cardDescription: "了解紅、藍、白色硬地滾球的用途、完整球具套裝內容，以及初學者、學校及機構的球具準備方法。",
+      introParagraphs: [
+        "初次接觸硬地滾球，最基本需要一套完整球具，包括紅色球、藍色球及白色目標球（Jack）。如果進行正式活動或比賽，亦可能需要量度及裁判工具。",
+        "以下簡單介紹硬地滾球基本器材、不同顏色球的用途，以及初學者如何選擇球具。",
+      ],
+      notice: null,
+      summaryTable: null,
+      sections: [
+        {
+          heading: "硬地滾球的紅、藍、白球有什麼用途？",
+          paragraphs: [
+            "紅色球及藍色球代表比賽雙方。參加者需要運用投球技巧及策略，令自己的球盡量接近白色目標球。",
+            "白色球（Jack）是每局的目標球，紅、藍雙方都會圍繞它的位置進行攻防及計分。",
+          ],
+        },
+        {
+          heading: "硬地滾球基本器材有哪些？",
+          paragraphs: ["一套完整硬地滾球包括："],
+          bullets: ["6個紅色球", "6個藍色球", "1個白色目標球（Jack）", "收納袋"],
+          afterBullets: "即合共 13個球。",
+          afterParagraphs: ["進行正式活動或比賽時，亦可能需要裁判板、量度工具及其他裁判用品。"],
+        },
+        {
+          heading: "初學者需要準備什麼？",
+          paragraphs: [
+            "初學者不需要準備大量專業器材，一套完整硬地滾球及合適的活動空間已經可以開始。",
+            "初學階段可以先認識投球方法、力度控制、基本計分及簡單策略，再按需要增加其他器材。",
+            "學校或機構舉辦活動時，則可以按照參加人數及分組方式決定所需球具數量。",
+          ],
+        },
+        {
+          heading: "香港可以在哪裡購買硬地滾球球具？",
+          paragraphs: [
+            "中國香港硬地滾球總會提供硬地滾球球具及相關裁判用品。",
+            "球具套裝包括 6個紅色球、6個藍色球、1個白色目標球及收納袋，適合初學者、學校及機構作體驗、教學及訓練用途。",
+            "如需了解球具詳情，可透過本會網站的 WhatsApp 或電郵查詢。",
+          ],
+        },
+      ],
+      faqs: [
+        {
+          question: "一套硬地滾球有多少個球？",
+          answer: "一套共有13個球，包括6個紅色球、6個藍色球及1個白色目標球。",
+        },
+        {
+          question: "初學者需要裁判工具嗎？",
+          answer: "一般體驗及初學訓練可以先使用基本球具；正式活動或比賽則可按需要加入裁判及量度工具。",
+        },
+        {
+          question: "學校及機構可以購買嗎？",
+          answer: "可以，可按照參加人數及活動形式選擇合適的球具數量。",
+        },
+      ],
+      relatedLinks: [
+        { label: "認識硬地滾球", path: "/rules" },
+        { label: "查看硬地滾球球具", path: "/equipment" },
+      ],
+      ctaTitle: "需要安排硬地滾球外展服務？",
+      ctaText: "中國香港硬地滾球總會可為學校、機構及團體安排合適的硬地滾球活動。",
+      ctaAction: "查詢外展服務",
+      ctaPath: "/services",
     },
   ],
   en: [
