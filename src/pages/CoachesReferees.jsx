@@ -24,6 +24,26 @@ export default function CoachesReferees() {
         </div>
       </section>
 
+      {page.latestCourse ? (
+        <section className="section editorial-section latest-course-section">
+          <SectionHeading kicker={page.latestCourse.kicker} />
+          <div className="editorial-copy">
+            <h2>{page.latestCourse.title}</h2>
+            <p><strong>{page.latestCourse.dateLabel}：</strong>{page.latestCourse.date}</p>
+            <p><strong>{page.latestCourse.timeLabel}：</strong>{page.latestCourse.time}</p>
+            <p><strong>{page.latestCourse.feeLabel}：</strong>{page.latestCourse.fee}</p>
+            <p><strong>{page.latestCourse.capacityLabel}：</strong>{page.latestCourse.capacity}</p>
+            <p><strong>{page.latestCourse.locationLabel}：</strong>{page.latestCourse.location}</p>
+            <p className="latest-course-registration">
+              <strong>{page.latestCourse.registrationLabel}：</strong>
+              <a href={page.latestCourse.registrationUrl} target="_blank" rel="noreferrer">
+                {page.latestCourse.registrationUrl}
+              </a>
+            </p>
+          </div>
+        </section>
+      ) : null}
+
       <section className="section editorial-section">
         <SectionHeading kicker={page.standardKicker} title={page.standardTitle} />
         <div className="editorial-copy">

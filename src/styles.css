@@ -1408,6 +1408,20 @@ p {
   max-width: 790px;
 }
 
+.latest-course-section .editorial-copy > h2 {
+  width: min(400px, 100%);
+  font-size: 40px;
+  font-weight: 600;
+}
+
+.latest-course-registration a {
+  color: var(--red);
+  font-weight: 700;
+  overflow-wrap: anywhere;
+  text-decoration: underline;
+  text-underline-offset: 0.16em;
+}
+
 .rules-grid {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
