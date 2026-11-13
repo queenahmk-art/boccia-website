@@ -3,6 +3,7 @@ import FeatureStrip from "../components/FeatureStrip.jsx";
 import Hero from "../components/Hero.jsx";
 import ProgramCard from "../components/ProgramCard.jsx";
 import SectionHeading from "../components/SectionHeading.jsx";
+import ServedOrganisations from "../components/ServedOrganisations.jsx";
 import { assetMeta, assets } from "../data/siteData.js";
 import { useSiteContent } from "../hooks/useSiteContent.js";
 
@@ -80,6 +81,8 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+      <ServedOrganisations />
 
       <FeatureStrip
         kicker={home.audienceKicker}

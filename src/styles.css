@@ -330,7 +330,6 @@ p {
 .hero {
   position: relative;
   display: grid;
-  min-height: calc(100vh - 82px);
   overflow: hidden;
   color: var(--paper);
   background: var(--ink);
@@ -360,7 +359,7 @@ p {
   z-index: 1;
   align-self: center;
   width: min(760px, 100%);
-  padding: clamp(58px, 10vw, 120px) clamp(18px, 5vw, 72px) clamp(150px, 16vw, 210px);
+  padding: clamp(44px, 6vw, 80px) clamp(18px, 5vw, 72px) clamp(28px, 4vw, 48px);
 }
 
 .hero h1,
@@ -412,13 +411,11 @@ p {
 }
 
 .hero-stat-strip {
-  position: absolute;
-  right: clamp(18px, 5vw, 72px);
-  bottom: 0;
-  left: clamp(18px, 5vw, 72px);
+  position: relative;
   z-index: 2;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-inline: clamp(18px, 5vw, 72px);
   background: var(--paper);
   box-shadow: var(--shadow);
 }
@@ -427,7 +424,7 @@ p {
   display: grid;
   gap: 4px;
   min-width: 0;
-  padding: clamp(18px, 3vw, 30px);
+  padding: clamp(14px, 2vw, 24px);
   border-right: 1px solid var(--line);
 }
 
@@ -517,7 +514,7 @@ p {
 }
 
 .game-page-intro {
-  padding: clamp(52px, 7vw, 92px) clamp(18px, 5vw, 72px) clamp(36px, 5vw, 62px);
+  padding: clamp(24px, 5vw, 68px) clamp(18px, 5vw, 72px) clamp(24px, 4vw, 48px);
   color: var(--paper);
   background: var(--blue-dark);
 }
@@ -538,6 +535,7 @@ p {
 
 .game-page-intro p:not(.section-kicker) {
   max-width: 780px;
+  margin-bottom: 12px;
   font-size: 0.9375rem;
 }
 
@@ -726,6 +724,71 @@ p {
   align-items: stretch;
 }
 
+.served-organisations {
+  padding-block: clamp(36px, 5vw, 64px);
+}
+
+.served-organisations .section-heading {
+  margin-bottom: clamp(20px, 3vw, 30px);
+}
+
+.served-organisations h2 {
+  font-size: 30px;
+}
+
+.served-organisations-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(10px, 2vw, 20px);
+  max-width: 1060px;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+}
+
+.served-organisations-card {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr);
+  place-items: center;
+  min-width: 0;
+  height: clamp(96px, 13vw, 144px);
+  padding: clamp(8px, 1.3vw, 16px);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  background: var(--paper);
+}
+
+.served-organisations-card img {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  object-fit: contain;
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .served-organisations-card {
+    transition: box-shadow 180ms ease;
+  }
+
+  .served-organisations-card img {
+    transition: transform 180ms ease;
+  }
+
+  .served-organisations-card:hover {
+    box-shadow: 0 8px 20px rgba(7, 8, 13, 0.12);
+  }
+
+  .served-organisations-card:hover img {
+    transform: translateY(-5px);
+  }
+}
+
+@media (min-width: 1025px) {
+  .served-organisations-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
 .program-card {
   display: grid;
   min-width: 0;
@@ -896,6 +959,11 @@ p {
   white-space: nowrap;
 }
 
+:lang(en) .audience-strip .feature-strip-heading h2 {
+  font-size: clamp(15px, 3.4vw, 30px);
+  white-space: normal;
+}
+
 .rules-focus-strip .feature-strip-heading .section-kicker {
   font-size: 28px;
 }
@@ -1004,7 +1072,7 @@ p {
 }
 
 .page-hero {
-  padding: clamp(58px, 9vw, 118px) clamp(18px, 5vw, 72px);
+  padding: clamp(36px, 5.5vw, 76px) clamp(18px, 5vw, 72px);
 }
 
 .page-hero.compact {
@@ -1015,7 +1083,6 @@ p {
   margin-bottom: 12px;
   font-size: var(--page-hero-kicker-size);
   line-height: 1.65;
-  white-space: nowrap;
 }
 
 .page-hero.services-hero .eyebrow {
@@ -1033,8 +1100,11 @@ p {
   color: var(--paper);
 }
 
-.image-page-hero.coaches-page-hero {
-  min-height: 400px;
+:lang(zh) .hero .hero-title-top,
+.about-hero .eyebrow,
+.rules-hero .eyebrow,
+.coaches-page-hero .eyebrow {
+  font-size: min(var(--page-hero-title-size), 50px);
 }
 
 .coaches-page-hero .eyebrow.light {
@@ -1119,14 +1189,14 @@ p {
 .knowledge-article {
   max-width: 1180px;
   margin: 0 auto;
-  padding: clamp(34px, 5vw, 72px) clamp(18px, 5vw, 72px) 24px;
+  padding: clamp(28px, 4vw, 56px) clamp(18px, 5vw, 72px) 24px;
 }
 
 .knowledge-breadcrumb {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-bottom: clamp(28px, 5vw, 58px);
+  margin-bottom: clamp(22px, 4vw, 44px);
   color: var(--muted);
   font-size: 0.9rem;
   font-weight: 800;
@@ -1143,7 +1213,7 @@ p {
 
 .knowledge-article-header {
   max-width: 950px;
-  padding-bottom: clamp(28px, 5vw, 52px);
+  padding-bottom: clamp(24px, 4vw, 42px);
   border-bottom: 1px solid var(--line);
 }
 
@@ -1360,11 +1430,16 @@ p {
 .image-page-hero {
   position: relative;
   display: grid;
-  min-height: 520px;
-  align-items: end;
+  min-height: clamp(320px, 38vw, 420px);
+  padding-block: clamp(44px, 6vw, 80px);
+  align-items: center;
   overflow: hidden;
   color: var(--paper);
   background: var(--ink);
+}
+
+.image-page-hero.coaches-page-hero {
+  min-height: clamp(300px, 33vw, 360px);
 }
 
 .image-page-hero img {
@@ -1738,7 +1813,6 @@ p {
 
 .equipment-hero {
   max-width: none;
-  padding-block: clamp(68px, 8vw, 116px);
   color: var(--paper);
   background:
     linear-gradient(118deg, rgba(6, 19, 63, 0.99), rgba(16, 42, 131, 0.96)),
@@ -1988,15 +2062,6 @@ p {
   .offer-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-
-  .hero {
-    min-height: 760px;
-  }
-
-  .hero-copy {
-    align-self: start;
-    padding-top: 70px;
-  }
 }
 
 @media (max-width: 760px) {
@@ -2124,15 +2189,6 @@ p {
     padding-inline: 16px;
   }
 
-  .hero {
-    min-height: 770px;
-  }
-
-  .hero-copy {
-    padding-top: 52px;
-    padding-bottom: 260px;
-  }
-
   .hero-overlay {
     background:
       linear-gradient(180deg, rgba(7, 8, 13, 0.88), rgba(7, 8, 13, 0.54) 54%, rgba(7, 8, 13, 0.9)),
@@ -2140,8 +2196,7 @@ p {
   }
 
   .hero-stat-strip {
-    right: 16px;
-    left: 16px;
+    margin-inline: 16px;
     grid-template-columns: 1fr;
   }
 
@@ -2179,14 +2234,6 @@ p {
     aspect-ratio: 4 / 3;
   }
 
-  .image-page-hero {
-    min-height: 460px;
-  }
-
-  .coaches-page-hero {
-    min-height: 400px;
-  }
-
   .cta-section {
     display: grid;
     margin-inline: 16px;
@@ -2203,10 +2250,6 @@ p {
   .equipment-service-entrance {
     display: grid;
     align-items: start;
-  }
-
-  .equipment-hero {
-    padding-block: 52px;
   }
 
   .equipment-hero .eyebrow {
@@ -2305,10 +2348,6 @@ p {
   .contact-form,
   .contact-panel {
     padding: 22px;
-  }
-
-  .hero {
-    min-height: 820px;
   }
 
   .knowledge-text-link {

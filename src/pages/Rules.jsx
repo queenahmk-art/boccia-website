@@ -13,7 +13,7 @@ export default function Rules() {
 
   return (
     <>
-      <section className="page-hero image-page-hero">
+      <section className="page-hero image-page-hero rules-hero">
           <img
             src={assets.rulesImage}
             alt={rules.imageAlt}

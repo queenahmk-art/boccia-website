@@ -10,7 +10,7 @@ export default function About() {
 
   return (
     <>
-      <section className="page-hero image-page-hero">
+      <section className="page-hero image-page-hero about-hero">
         <img
           src={assets.eventImage}
           alt={about.imageAlt}

@@ -131,6 +131,10 @@ export const siteContent = {
   zh: {
     langLabel: "中文",
     otherLangLabel: "English",
+    servedOrganisations: {
+      title: "過往服務機構",
+      copy: "本會曾與不同機構合作推廣硬地滾球運動，透過體驗活動及培訓，讓更多人士認識硬地滾球。",
+    },
     brand: {
       name: "中國香港硬地滾球總會",
       subname: "",
@@ -155,7 +159,6 @@ export const siteContent = {
         }[key],
     })),
     hero: {
-      kicker: "硬地滾球・香港",
       titleTop: "硬地滾球",
       titleSub: "",
       lead: "中國香港硬地滾球總會致力推廣硬地滾球，讓更多市民接觸並參與這項充滿策略、專注及技巧的運動。",
@@ -171,7 +174,6 @@ export const siteContent = {
     ],
     home: {
       offerKicker: "服務範疇",
-      offerTitle: "我們提供",
       offerCopy: "由體驗推廣到專業培訓，再到球具安排，協助不同機構更容易啟動硬地滾球活動。",
       missionKicker: "本會使命",
       missionTitle: "讓硬地滾球走進校園、企業及社區",
@@ -420,6 +422,10 @@ export const siteContent = {
   en: {
     langLabel: "English",
     otherLangLabel: "中文",
+    servedOrganisations: {
+      title: "Organisations We Have Served",
+      copy: "We have worked with various organisations to promote boccia through activities and training programmes.",
+    },
     brand: {
       name: "The Boccia Association of Hong Kong, China Limited",
       subname: "",

@@ -2,6 +2,7 @@ import { Link } from "react-router";
 import FeatureStrip from "../components/FeatureStrip.jsx";
 import ProgramCard from "../components/ProgramCard.jsx";
 import SectionHeading from "../components/SectionHeading.jsx";
+import ServedOrganisations from "../components/ServedOrganisations.jsx";
 import { useSiteContent } from "../hooks/useSiteContent.js";
 
 export default function Services() {
@@ -37,6 +38,8 @@ export default function Services() {
       </section>
 
       <FeatureStrip kicker={page.audienceKicker} title={page.audienceTitle} items={content.audiences} />
+
+      <ServedOrganisations />
     </>
   );
 }
